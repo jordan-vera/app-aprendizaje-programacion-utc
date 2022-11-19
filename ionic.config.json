@@ -1,0 +1,7 @@
+{
+  "name": "app-aprendizaje-programacion-utc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
