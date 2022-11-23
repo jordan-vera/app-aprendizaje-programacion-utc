@@ -1,0 +1,109 @@
+<ion-content class="ion-padding">
+  <div style="background-color: rgba(234, 234, 234, 0.696);" class="p-2 rounded">
+    <h4 class="border-bottom pb-2">
+      <b>{{clase.nombreclase}}</b>
+    </h4>
+    <small><b>Fecha: </b>{{clase.created_at}}</small> <br>
+    <small><b>Curso: </b>{{curso.nombrecurso}}</small>
+  </div>
+  <br>
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Programas</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-button fill="outline" size="default" color="secondary" expand="block" id="open-modal-programas"
+          expand="block">
+          Agregar programa
+        </ion-button>
+
+        <div class="pt-2 pb-2">
+
+        </div>
+
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>Quizz</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        Second Content
+      </div>
+    </ion-accordion>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-label>Puzzle</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        Third Content
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
+
+  <ion-modal trigger="open-modal-programas">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title slot="start">Agregar programa</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">
+              <label style="color: red">Cerrar</label>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div style="background-color: rgb(177, 177, 177);" class="rounded">
+          <ion-item>
+            <ion-label position="stacked">Título pregunta</ion-label>
+            <ion-textarea placeholder="Ingresar pregunta" name="titulo" [(ngModel)]="programa.titulo" [autoGrow]="true">
+            </ion-textarea>
+          </ion-item>
+        </div>
+
+        <br>
+        <ion-item>
+          <ion-label position="stacked">Respuesta</ion-label>
+          <ion-textarea placeholder="Ingresar respuesta en código" name="fragmentocod"
+            [(ngModel)]="codigoRespuestaCreate.fragmentocodigo" [autoGrow]="true">
+          </ion-textarea>
+        </ion-item>
+        <ion-item *ngIf="hayUnaRespuestaCorrecta == false">
+          <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="codigoRespuestaCreate.respuestacorrecta">
+          </ion-checkbox>
+          <ion-label>Es correcta</ion-label>
+        </ion-item>
+        <div class="text-end mt-2">
+          <ion-button color="medium" (click)="agregarRespuestaCodigo()">Agregar respuesta</ion-button>
+        </div>
+        <br>
+
+        <div class="mb-2 border-bottom" *ngFor="let x of codigoRespuesta; let i = index">
+          <p class="mb-1"><b>{{i+1}}.) {{x.fragmentocodigo}}</b></p>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
+                <small *ngIf="x.respuestacorrecta == false" class="text-danger">Es incorrecta</small>
+              </ion-col>
+              <ion-col class="text-end">
+                <ion-button color="danger" size="small" (click)="eliminarRespuestaCodigo(i)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <br>
+        <ion-button expand="block" id="open-modal" expand="block" (click)="guardarPrograma()">
+          <ion-icon name="save-outline" class="me-2"></ion-icon> Guardar
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

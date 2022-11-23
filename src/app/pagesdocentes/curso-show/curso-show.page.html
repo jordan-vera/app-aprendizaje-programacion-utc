@@ -1,0 +1,20 @@
+<ion-content class="ion-padding">
+  <div class="rounded">
+    <img src="{{urlImage+curso.imagen}}" class="rounded" alt="" srcset="">
+  </div>
+  <h5>{{curso.nombrecurso}}</h5>
+  <small>{{curso.created_at}}</small>
+  <br>
+  
+  <ion-button expand="block" id="open-modal" class="mt-3" color="primary">
+    <ion-icon name="today-outline" class="me-2"></ion-icon> Clases del curso
+  </ion-button>
+
+  <ion-button expand="block" id="open-modal" class="mt-3" color="primary">
+    <ion-icon name="people-outline" class="me-2"></ion-icon> Estudiantes en el curso
+  </ion-button>
+
+  <ion-button expand="block" id="open-modal" class="mt-3" color="danger">
+    <ion-icon name="trash-outline" class="me-2"></ion-icon> Eliminar Curso
+  </ion-button>
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-app style="z-index: 1; " class="sss">
+  <ion-split-pane contentId="main-content">
+    <ion-menu content-id="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar translucent style="padding-left: 13px; " class="barra-menu">
+          <div class="container font-cairo mb-2">
+
+            {{nombres}}
+
+          </div>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list id="inbox-list" lines="none">
+          <ion-menu-toggle auto-hide="false">
+
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Desboard', '/panel/desboard')">
+              <ion-icon name="home-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Desboard</label>
+              </ion-label>
+            </ion-item>
+
+
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/cursos')">
+              <ion-icon name="bookmarks-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Cursos</label>
+              </ion-label>
+            </ion-item>
+
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Clases', '/panel/clases')">
+              <ion-icon name="today-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Clases</label>
+              </ion-label>
+            </ion-item>
+
+
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar class="barra">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>{{titulo}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+  </ion-split-pane>
+</ion-app>
