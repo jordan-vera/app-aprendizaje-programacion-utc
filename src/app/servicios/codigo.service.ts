@@ -28,4 +28,8 @@ export class CodigoService {
         return this._http.get(this.url + 'codigo-one/' + idprograma);
     }
 
+    eliminarAllCodigos(idprograma: number): Observable<any> {
+        return this._http.get(this.url + 'codigo-delete/' + idprograma);
+    }
+
 }

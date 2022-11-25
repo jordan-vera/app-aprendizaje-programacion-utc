@@ -28,7 +28,9 @@
     "angular2-uuid": "^1.1.1",
     "bootstrap": "^5.2.2",
     "ionicons": "^6.0.3",
+    "monaco-editor": "^0.33.0",
     "ngx-image-compress": "^13.1.13",
+    "ngx-monaco-editor-v2": "^14.0.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

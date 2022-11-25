@@ -14,6 +14,7 @@ import {NgxImageCompressService} from "ngx-image-compress";
 import { ClaseService } from './servicios/clases.service';
 import { ProgramaService } from './servicios/programa.service';
 import { CodigoService } from './servicios/codigo.service';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { CodigoService } from './servicios/codigo.service';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    HttpClientModule
+    HttpClientModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -31,7 +33,7 @@ import { CodigoService } from './servicios/codigo.service';
     NgxImageCompressService,
     ClaseService,
     ProgramaService,
-    CodigoService
+    CodigoService,
   ],
   bootstrap: [AppComponent],
 })

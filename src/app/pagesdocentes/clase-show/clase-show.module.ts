@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ClaseShowPageRoutingModule } from './clase-show-routing.module';
 
 import { ClaseShowPage } from './clase-show.page';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClaseShowPageRoutingModule
+    ClaseShowPageRoutingModule,
+    MonacoEditorModule
   ],
   declarations: [ClaseShowPage]
 })

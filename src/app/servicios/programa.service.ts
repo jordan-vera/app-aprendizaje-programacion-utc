@@ -28,4 +28,8 @@ export class ProgramaService {
         return this._http.get(this.url + 'programa-one/' + idprograma);
     }
 
+    eliminarPrograma(idprograma: number): Observable<any> {
+        return this._http.get(this.url + 'programas-delete/' + idprograma);
+    }
+
 }

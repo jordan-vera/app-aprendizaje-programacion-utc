@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IonModal, ToastController } from '@ionic/angular';
 import { Clases } from 'src/app/models/Clases';
@@ -17,6 +17,11 @@ import { ProgramaService } from 'src/app/servicios/programa.service';
 })
 export class ClaseShowPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
+  isModalOpen = false;
+  isModalOpenQuizCreate = false;
+
+  @Input() activeTheme = 'vs';
+  @Input() readOnly = false;
 
   public idclase: number = 0;
   public clase: Clases = new Clases(0, '', 0, true);
@@ -24,8 +29,16 @@ export class ClaseShowPage implements OnInit {
 
   public programa: Programa = new Programa(0, '', 0, '');
   public codigoRespuesta: Codigo[] = [];
-  public codigoRespuestaCreate: Codigo = new Codigo(0, '', false, 0, '');
+  public codigoRespuestaCreate: Codigo = new Codigo(0, '// Escribir código', false, 0, '');
   public hayUnaRespuestaCorrecta: boolean = false;
+
+  public programas: Programa[];
+  public codigosDetalle: Codigo[] = [];
+  public programaDetalleOne: Programa = new Programa(0, '', 0, '');
+  
+  
+  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+
 
   constructor(
     private _route: ActivatedRoute,
@@ -42,10 +55,63 @@ export class ClaseShowPage implements OnInit {
   }
 
   ngOnInit() {
+
+
+  }
+
+  cancelQuizz() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  eliminarPreguntaProgramaCodigos(): void {
+    this._programaService.eliminarPrograma(this.programaDetalleOne.idprograma).subscribe(
+      response => {
+        this._codigoService.eliminarAllCodigos(this.programaDetalleOne.idprograma).subscribe(
+          response => {
+            this.presentToast('top', 'Programa eliminado corectamente!!');
+            this.isModalOpen = false;
+            this.getProgramas();
+          }, error => {
+            console.log(error);
+          }
+        )
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  setOpen(isOpen: boolean, idclase: number, tituloprograma: string, idprograma: number, fechaprograma: string) {
+    this.isModalOpen = isOpen;
+    if (isOpen == true) {
+      this.programaDetalleOne = new Programa(idprograma, tituloprograma, idclase, fechaprograma);
+      this.getCodigoOne(idprograma);
+    }
+  }
+
+  getCodigoOne(idprograma: number): void {
+    this._codigoService.getcodigos(idprograma).subscribe(
+      response => {
+        this.codigosDetalle = response.response;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getProgramas(): void {
+    this._programaService.getprogramas(this.idclase).subscribe(
+      response => {
+        this.programas = response.response;
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
   guardarPrograma(): void {
     if (this.codigoRespuesta.length > 0) {
+      this.programa.idclase = this.idclase;
       this._programaService.create(this.programa).subscribe(
         response => {
           let idprograma = response.response;
@@ -73,6 +139,7 @@ export class ClaseShowPage implements OnInit {
         if (posicion == (this.codigoRespuesta.length - 1)) {
           this.limpiar();
           this.presentToast('top', 'Programa guardado corectamente!!')
+          this.getProgramas();
         }
       }, error => {
         console.log(error);
