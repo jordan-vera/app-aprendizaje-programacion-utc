@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">Agregar Quizz</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <label style="color: red">Cerrar</label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <small>Escribir la pregunta</small>
+  <ion-textarea class="custom-textarea" placeholder="Escribir la pregunta" name="pregunta" [(ngModel)]="quizz.titulo"></ion-textarea>
+  <hr class="border">
+
+  <ion-textarea class="custom-textarea" placeholder="Respuesta opción 1" name="respuesta1"
+    [(ngModel)]="respuesta1.respuesta"></ion-textarea>
+  <ion-item>
+    <ion-checkbox slot="start" name="escorrecto1" [(ngModel)]="respuesta1.escorrecta" (click)="validarCorrecta(1)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-textarea class="custom-textarea mb-0" placeholder="Respuesta opción 2" name="respuesta2"
+    [(ngModel)]="respuesta2.respuesta"></ion-textarea>
+  <ion-item class="mt-0">
+    <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="respuesta2.escorrecta" (click)="validarCorrecta(2)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+  <br>
+
+  <ion-textarea class="custom-textarea" placeholder="Respuesta opción 3" name="respuesta3"
+    [(ngModel)]="respuesta3.respuesta"></ion-textarea>
+  <ion-item>
+    <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="respuesta3.escorrecta" (click)="validarCorrecta(3)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+  <br>
+
+  <ion-textarea class="custom-textarea" placeholder="Respuesta opción 4" name="respuesta4"
+    [(ngModel)]="respuesta4.respuesta"></ion-textarea>
+  <ion-item>
+    <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="respuesta4.escorrecta" (click)="validarCorrecta(4)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+  <br>
+
+
+  <ion-button expand="block" (click)="guardarQuizz()">
+    <ion-icon name="save-outline" class="me-2"></ion-icon> Guardar
+  </ion-button>
+
+</ion-content>

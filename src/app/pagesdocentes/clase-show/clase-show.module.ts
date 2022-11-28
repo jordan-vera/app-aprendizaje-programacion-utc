@@ -8,6 +8,8 @@ import { ClaseShowPageRoutingModule } from './clase-show-routing.module';
 
 import { ClaseShowPage } from './clase-show.page';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { ModalAgregarProgramaPageModule } from './modal-agregar-programa/modal-agregar-programa.module';
+import { ModalAgregarQuizzPageModule } from './modal-agregar-quizz/modal-agregar-quizz.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,10 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
     FormsModule,
     IonicModule,
     ClaseShowPageRoutingModule,
-    MonacoEditorModule
+    MonacoEditorModule,
+    ModalAgregarProgramaPageModule,
+    ModalAgregarQuizzPageModule
   ],
-  declarations: [ClaseShowPage]
+  declarations: [ClaseShowPage],
 })
 export class ClaseShowPageModule {}

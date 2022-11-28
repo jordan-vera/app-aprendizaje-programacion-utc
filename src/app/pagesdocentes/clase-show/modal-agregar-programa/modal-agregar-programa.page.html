@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="cancel()">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Agregar programa</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+
+  <div style="background-color: rgb(177, 177, 177);" class="rounded">
+    <ion-item>
+      <ion-label position="stacked">Título pregunta</ion-label>
+      <ion-textarea placeholder="Ingresar pregunta" name="titulo" [(ngModel)]="programa.titulo" [autoGrow]="true">
+      </ion-textarea>
+    </ion-item>
+  </div>
+
+  <br>
+  <ion-label position="stacked" class="mb-2">Escribir respuesta</ion-label>
+
+  <div style="height: 100px">
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="fragmentoCodigo">
+    </ngx-monaco-editor>
+  </div>
+
+  <ion-item *ngIf="hayUnaRespuestaCorrecta == false">
+    <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="codigoRespuestaCreate.respuestacorrecta">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+  <div class="text-end mt-2">
+    <ion-button color="medium" (click)="agregarRespuestaCodigo()">Agregar respuesta</ion-button>
+  </div>
+
+  <br>
+
+  <div class="mb-2 border-bottom" *ngFor="let x of codigoRespuesta; let i = index">
+    <p class="mb-1"><b>Respuesta {{i+1}}</b></p>
+    <div style="height: 100px">
+      <ngx-monaco-editor style="height: 100%" [options]="editorOptions2" [(ngModel)]="x.fragmentocodigo">
+      </ngx-monaco-editor>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
+          <small *ngIf="x.respuestacorrecta == false" class="text-danger">Es incorrecta</small>
+        </ion-col>
+        <ion-col class="text-end">
+          <ion-button color="danger" size="small" (click)="eliminarRespuestaCodigo(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <br>
+
+  <ion-button (click)="guardarPrograma()" expand="block">
+    <ion-icon name="save-outline" class="me-2"></ion-icon> Guardar
+  </ion-button>
+
+</ion-content>

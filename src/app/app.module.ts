@@ -15,6 +15,8 @@ import { ClaseService } from './servicios/clases.service';
 import { ProgramaService } from './servicios/programa.service';
 import { CodigoService } from './servicios/codigo.service';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { QuizzService } from './servicios/quizz.service';
+import { RespuestaquizzService } from './servicios/respuestaquizz.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +36,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
     ClaseService,
     ProgramaService,
     CodigoService,
+    QuizzService,
+    RespuestaquizzService
   ],
   bootstrap: [AppComponent],
 })

@@ -13,7 +13,7 @@
         <ion-label>Preguntas tipo programas</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <ion-button fill="outline" size="default" color="secondary" id="open-modal-programas" expand="block">
+        <ion-button fill="outline" size="default" expand="block" (click)="openModal()">
           Agregar programa
         </ion-button>
 
@@ -33,7 +33,7 @@
         <ion-label>Quizz</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <ion-button fill="outline" size="default" color="secondary" (click)="isModalOpenQuizCreate = true"   expand="block">
+        <ion-button fill="outline" size="default" color="secondary" (click)="openModalAddQuizz()" expand="block">
           Agregar Quizz
         </ion-button>
       </div>
@@ -50,74 +50,6 @@
 
 
 
-  <ion-modal trigger="open-modal-programas">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title slot="start">Agregar programa</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="cancel()">
-              <label style="color: red">Cerrar</label>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <div style="background-color: rgb(177, 177, 177);" class="rounded">
-          <ion-item>
-            <ion-label position="stacked">Título pregunta</ion-label>
-            <ion-textarea placeholder="Ingresar pregunta" name="titulo" [(ngModel)]="programa.titulo" [autoGrow]="true">
-            </ion-textarea>
-          </ion-item>
-        </div>
-
-        <br>
-        <ion-label position="stacked" class="mb-2">Escribir respuesta</ion-label>
-        <div style="height: 100px">
-          <ngx-monaco-editor style="height: 100%" [options]="editorOptions" name="fragmentocod"
-            [(ngModel)]="codigoRespuestaCreate.fragmentocodigo" [autoGrow]="true"></ngx-monaco-editor>
-        </div>
-
-
-        <ion-item *ngIf="hayUnaRespuestaCorrecta == false">
-          <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="codigoRespuestaCreate.respuestacorrecta">
-          </ion-checkbox>
-          <ion-label>Es correcta</ion-label>
-        </ion-item>
-        <div class="text-end mt-2">
-          <ion-button color="medium" (click)="agregarRespuestaCodigo()">Agregar respuesta</ion-button>
-        </div>
-        <br>
-
-        <div class="mb-2 border-bottom" *ngFor="let x of codigoRespuesta; let i = index">
-          <p class="mb-1"><b>Respuesta {{i+1}}</b></p>
-          <div style="height: 100px">
-            <ngx-monaco-editor style="height: 100%" [options]="editorOptions" name="fragmentocod" [(ngModel)]="x.fragmentocodigo"
-              [autoGrow]="true"></ngx-monaco-editor>
-          </div>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
-                <small *ngIf="x.respuestacorrecta == false" class="text-danger">Es incorrecta</small>
-              </ion-col>
-              <ion-col class="text-end">
-                <ion-button color="danger" size="small" (click)="eliminarRespuestaCodigo(i)">
-                  <ion-icon name="trash-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </div>
-
-        <br>
-
-        <ion-button expand="block" id="open-modal" expand="block" (click)="guardarPrograma()">
-          <ion-icon name="save-outline" class="me-2"></ion-icon> Guardar
-        </ion-button>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
@@ -140,8 +72,9 @@
 
         <div *ngFor="let x of codigosDetalle; let i = index" class="border-bottom  mt-4 ">
           <p class="mb-0">Respuesta {{i+1}} </p>
-          <div style="height: 100px">
-            <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="x.fragmentocodigo"></ngx-monaco-editor>
+          <div style="height: 100px; background-color: black;">
+            <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="x.fragmentocodigo">
+            </ngx-monaco-editor>
           </div>
           <div class="text-end">
             <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
@@ -158,42 +91,4 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal [isOpen]="isModalOpenQuizCreate">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title slot="start">Detalle Quizz</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="isModalOpenQuizCreate = false">
-              <label style="color: red">Cerrar</label>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <div class="p-2 rounded border border-info text-secondary">
-          <h5 class=" pt-2">
-            <b>{{programaDetalleOne.titulo}}</b>
-          </h5>
-        </div>
-
-        <div *ngFor="let x of codigosDetalle; let i = index" class="border-bottom  mt-4 ">
-          <p class="mb-0">Respuesta {{i+1}} </p>
-          <div style="height: 100px">
-            <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="x.fragmentocodigo"></ngx-monaco-editor>
-          </div>
-          <div class="text-end">
-            <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
-            <small *ngIf="x.respuestacorrecta == false" class="text-danger">Es incorrecta</small>
-          </div>
-        </div>
-        <br> <br>
-
-        <ion-button color="danger" expand="block" (click)="eliminarPreguntaProgramaCodigos()">
-          Eliminar Programa
-        </ion-button>
-
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>
