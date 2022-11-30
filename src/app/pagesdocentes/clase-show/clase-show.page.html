@@ -36,6 +36,15 @@
         <ion-button fill="outline" size="default" color="secondary" (click)="openModalAddQuizz()" expand="block">
           Agregar Quizz
         </ion-button>
+
+        <div class="pt-0 pb-0">
+          <ion-list>
+            <ion-item *ngFor="let x of quizzList; let i = index" color="light" expand="block" (click)="setOpenModalQuizzDetalle(x.idquizz)">
+              <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
       </div>
     </ion-accordion>
     <ion-accordion value="third">

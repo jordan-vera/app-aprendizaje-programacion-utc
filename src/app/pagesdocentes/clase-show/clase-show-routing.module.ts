@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     component: ClaseShowPage
   },
+  {
+    path: 'modal-quizz-detalle',
+    loadChildren: () => import('./modal-quizz-detalle/modal-quizz-detalle.module').then( m => m.ModalQuizzDetallePageModule)
+  },
 ];
 
 @NgModule({

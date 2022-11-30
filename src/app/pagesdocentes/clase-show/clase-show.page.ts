@@ -5,12 +5,15 @@ import { Clases } from 'src/app/models/Clases';
 import { Codigo } from 'src/app/models/Codigo';
 import { Curso } from 'src/app/models/Cursos';
 import { Programa } from 'src/app/models/Programa';
+import { Quizz } from 'src/app/models/Quizz';
 import { ClaseService } from 'src/app/servicios/clases.service';
 import { CodigoService } from 'src/app/servicios/codigo.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { ProgramaService } from 'src/app/servicios/programa.service';
+import { QuizzService } from 'src/app/servicios/quizz.service';
 import { ModalAgregarProgramaPage } from './modal-agregar-programa/modal-agregar-programa.page';
 import { ModalAgregarQuizzPage } from './modal-agregar-quizz/modal-agregar-quizz.page';
+import { ModalQuizzDetallePage } from './modal-quizz-detalle/modal-quizz-detalle.page';
 
 @Component({
   selector: 'app-clase-show',
@@ -20,7 +23,7 @@ import { ModalAgregarQuizzPage } from './modal-agregar-quizz/modal-agregar-quizz
 export class ClaseShowPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   isModalOpen = false;
-  isModalOpenQuizCreate = false;
+  isModalOpenQuizDetalle = false;
   isModalOpenPrograma = false;
 
   @Input() activeTheme = 'vs';
@@ -34,6 +37,8 @@ export class ClaseShowPage implements OnInit {
   public programaDetalleOne: Programa = new Programa(0, '', 0, '');
   public idclase: number = 0;
 
+  public quizzList: Quizz[] = [];
+
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
   editorOptions2 = { theme: 'vs-dark', language: 'javascript' };
 
@@ -46,6 +51,7 @@ export class ClaseShowPage implements OnInit {
     private toastController: ToastController,
     private modalCtrl: ModalController,
     private _programaService: ProgramaService,
+    private _quizzService: QuizzService
   ) {
     this._route.params.subscribe((params: Params) => {
       this.idclase = params.idclase;
@@ -54,6 +60,31 @@ export class ClaseShowPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async setOpenModalQuizzDetalle(idquizz: number) {
+    const modal = await this.modalCtrl.create({
+      component: ModalQuizzDetallePage,
+      componentProps: {
+        'idquizz': idquizz
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm') {
+      //this.getQuizzList(); 
+    }  
+  }
+
+  getQuizzList(): void {
+    this._quizzService.getquizzAll(this.idclase).subscribe(
+      response => {
+        this.quizzList = response.response;
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
   async openModalAddQuizz() {
@@ -67,7 +98,7 @@ export class ClaseShowPage implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
     if (role === 'confirm') {
-      // actualizar quizz
+      this.getQuizzList(); 
     }
   }
 
@@ -137,6 +168,7 @@ export class ClaseShowPage implements OnInit {
       response => {
         this.clase = response.response;
         this.getCurso();
+        this.getQuizzList();
       }, error => {
         console.log(error)
       }
