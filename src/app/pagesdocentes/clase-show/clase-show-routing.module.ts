@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'modal-quizz-detalle',
     loadChildren: () => import('./modal-quizz-detalle/modal-quizz-detalle.module').then( m => m.ModalQuizzDetallePageModule)
   },
+  {
+    path: 'modal-agregar-puzzle',
+    loadChildren: () => import('./modal-agregar-puzzle/modal-agregar-puzzle.module').then( m => m.ModalAgregarPuzzlePageModule)
+  },
 ];
 
 @NgModule({

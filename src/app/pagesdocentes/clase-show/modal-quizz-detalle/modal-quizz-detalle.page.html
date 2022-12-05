@@ -1,9 +1,67 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>modal-quizz-detalle</ion-title>
+    <ion-title>Detalle de quizz</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <label style="color: red">Cerrar</label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <small class="text-secondary">Pregunta</small>
+  <ion-item class="item-background-color">
+    <ion-textarea name="titulo" [(ngModel)]="quizzOne.titulo"></ion-textarea>
+  </ion-item>
 
+  <br>
+
+  <small class="text-secondary">* Respuesta 1</small>
+  <ion-item class="item-background-color mb-0">
+    <ion-textarea name="respuesta1" [(ngModel)]="respuesta1.respuesta"></ion-textarea>
+  </ion-item>
+  <ion-item class="mb-3">
+    <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="respuesta1.escorrecta" (click)="validarCorrecta(3)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+
+  <small class="text-secondary">* Respuesta 2</small>
+  <ion-item class="item-background-color mb-0">
+    <ion-textarea name="respuesta2" [(ngModel)]="respuesta2.respuesta"></ion-textarea>
+  </ion-item>
+  <ion-item class="mb-3">
+    <ion-checkbox slot="start" name="escorrecto2" [(ngModel)]="respuesta2.escorrecta" (click)="validarCorrecta(3)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+
+  <small class="text-secondary">* Respuesta 3</small>
+  <ion-item class="item-background-color mb-0">
+    <ion-textarea name="respuesta3" [(ngModel)]="respuesta3.respuesta"></ion-textarea>
+  </ion-item>
+  <ion-item class="mb-3">
+    <ion-checkbox slot="start" name="escorrecto3" [(ngModel)]="respuesta3.escorrecta" (click)="validarCorrecta(3)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+
+  <small class="text-secondary">* Respuesta 4</small>
+  <ion-item class="item-background-color">
+    <ion-textarea name="respuesta4" [(ngModel)]="respuesta4.respuesta"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox slot="start" name="escorrecto4" [(ngModel)]="respuesta4.escorrecta" (click)="validarCorrecta(3)">
+    </ion-checkbox>
+    <ion-label>Es correcta</ion-label>
+  </ion-item>
+  <br>
+  <button class="btn btn-outline-info w-100" (click)="actualizarTodo()">
+    Actualizar
+  </button>
+  <br>
+  <button class="btn btn-outline-danger mt-3 w-100" (click)="eliminar()">
+    Eliminar
+  </button>
 </ion-content>

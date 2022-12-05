@@ -20,6 +20,11 @@ export class RespuestaquizzService {
         return this._http.post(this.url + 'respuestaquizz', params);
     }
 
+    update(data: Respuestaquizz): Observable<any> {
+        let params = JSON.stringify(data);
+        return this._http.post(this.url + 'respuestaquizz-update', params);
+    }
+
     getrespuestaquizzAll(idquizz: number): Observable<any> {
         return this._http.get(this.url + 'respuestaquizz-all/' + idquizz);
     }

@@ -11,6 +11,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { ModalAgregarProgramaPageModule } from './modal-agregar-programa/modal-agregar-programa.module';
 import { ModalAgregarQuizzPageModule } from './modal-agregar-quizz/modal-agregar-quizz.module';
 import { ModalQuizzDetallePageModule } from './modal-quizz-detalle/modal-quizz-detalle.module';
+import { ModalAgregarPuzzlePageModule } from './modal-agregar-puzzle/modal-agregar-puzzle.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ModalQuizzDetallePageModule } from './modal-quizz-detalle/modal-quizz-d
     MonacoEditorModule,
     ModalAgregarProgramaPageModule,
     ModalAgregarQuizzPageModule,
-    ModalQuizzDetallePageModule
+    ModalQuizzDetallePageModule,
+    ModalAgregarPuzzlePageModule
   ],
   declarations: [ClaseShowPage],
 })

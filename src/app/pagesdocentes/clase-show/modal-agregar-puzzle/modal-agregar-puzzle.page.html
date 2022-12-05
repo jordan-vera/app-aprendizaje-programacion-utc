@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar puzzle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <label style="color: red">Cerrar</label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="border rounded text-center p-3 mb-3">
+    <ion-button color="medium" (click)="cargarImagen()" *ngIf="imagenEstado == false">Seleccionar imagen
+    </ion-button>
+    <div class="rounded" *ngIf="imagenEstado == true">
+      <img src="{{imagenCargada}}" class="w-100 rounded" (click)="cargarImagen()">
+    </div>
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Título</ion-label>
+    <ion-input name="titulo" [(ngModel)]="puzzle.titulo"></ion-input>
+  </ion-item>
+
+  <ion-item class="mt-2">
+    <ion-label position="floating">Tiempo estimado en minutos</ion-label>
+    <ion-input name="tiempo" [(ngModel)]="puzzle.tiempo_estimado"></ion-input>
+  </ion-item>
+
+  <br>
+
+
+  <ion-button expand="block" (click)="guardarPuzzle()">
+    <ion-icon name="save-outline" class="me-2"></ion-icon> Guardar
+  </ion-button>
+
+</ion-content>

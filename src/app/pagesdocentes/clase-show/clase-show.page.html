@@ -29,7 +29,7 @@
       </div>
     </ion-accordion>
     <ion-accordion value="second">
-      <ion-item slot="header" color="secondary">
+      <ion-item slot="header" color="secondary" (click)="getQuizzList()">
         <ion-label>Quizz</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
@@ -39,7 +39,8 @@
 
         <div class="pt-0 pb-0">
           <ion-list>
-            <ion-item *ngFor="let x of quizzList; let i = index" color="light" expand="block" (click)="setOpenModalQuizzDetalle(x.idquizz)">
+            <ion-item *ngFor="let x of quizzList; let i = index" color="light" expand="block"
+              (click)="setOpenModalQuizzDetalle(x.idquizz)">
               <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
             </ion-item>
           </ion-list>
@@ -48,16 +49,24 @@
       </div>
     </ion-accordion>
     <ion-accordion value="third">
-      <ion-item slot="header" color="secondary">
+      <ion-item slot="header" color="secondary" (click)="getListPuzzle()">
         <ion-label>Puzzle</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        Third Content
+        <ion-button fill="outline" size="default" color="secondary" (click)="openModalAddPuzzle()" expand="block">
+          Agregar Puzzle
+        </ion-button>
+
+        <div class="pt-0 pb-0">
+          <ion-list>
+            <ion-item *ngFor="let x of puzzleList; let i = index" color="light" expand="block">
+              <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
     </ion-accordion>
   </ion-accordion-group>
-
-
 
 
   <ion-modal [isOpen]="isModalOpen">
