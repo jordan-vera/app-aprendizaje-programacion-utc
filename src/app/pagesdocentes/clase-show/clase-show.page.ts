@@ -16,6 +16,7 @@ import { QuizzService } from 'src/app/servicios/quizz.service';
 import { ModalAgregarProgramaPage } from './modal-agregar-programa/modal-agregar-programa.page';
 import { ModalAgregarPuzzlePage } from './modal-agregar-puzzle/modal-agregar-puzzle.page';
 import { ModalAgregarQuizzPage } from './modal-agregar-quizz/modal-agregar-quizz.page';
+import { ModalPuzzleDetallePage } from './modal-puzzle-detalle/modal-puzzle-detalle.page';
 import { ModalQuizzDetallePage } from './modal-quizz-detalle/modal-quizz-detalle.page';
 
 @Component({
@@ -40,9 +41,9 @@ export class ClaseShowPage implements OnInit {
   public programaDetalleOne: Programa = new Programa(0, '', 0, '');
   public idclase: number = 0;
 
-  public quizzList: Quizz[] = [];
+  public quizzList: Quizz[];
 
-  public puzzleList: Puzzle[] = [];
+  public puzzleList: Puzzle[];
 
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
   editorOptions2 = { theme: 'vs-dark', language: 'javascript' };
@@ -67,6 +68,23 @@ export class ClaseShowPage implements OnInit {
   ngOnInit() {
   }
 
+  async setOpenModalPuzzleDetalle(idpuzzle: number) {
+    const modal = await this.modalCtrl.create({
+      component: ModalPuzzleDetallePage,
+      componentProps: {
+        'idpuzzle': idpuzzle
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm') {
+      this.getListPuzzle(); 
+    }  else {
+      this.getListPuzzle();
+    }
+  }
+
   async openModalAddPuzzle() {
     const modal = await this.modalCtrl.create({
       component: ModalAgregarPuzzlePage,
@@ -85,7 +103,11 @@ export class ClaseShowPage implements OnInit {
   getListPuzzle(): void {
     this._puzzleService.getpuzzleAll(this.idclase).subscribe(
       response => {
-        this.puzzleList = response.response;
+        if(response.response[0]) {
+          this.puzzleList = response.response;
+        } else {
+          this.puzzleList = null;
+        }
       }, error => {
         console.log(error);
       }
@@ -112,7 +134,11 @@ export class ClaseShowPage implements OnInit {
   getQuizzList(): void {
     this._quizzService.getquizzAll(this.idclase).subscribe(
       response => {
-        this.quizzList = response.response;
+        if(response.response[0]) {
+          this.quizzList = response.response;
+        } else {
+          this.quizzList = null;
+        }
       }, error => {
         console.log(error);
       }
@@ -188,7 +214,11 @@ export class ClaseShowPage implements OnInit {
   getProgramas(): void {
     this._programaService.getprogramas(this.idclase).subscribe(
       response => {
-        this.programas = response.response;
+        if(response.response[0]) {
+          this.programas = response.response;
+        } else {
+          this.programas = null;
+        }
       }, error => {
         console.log(error);
       }

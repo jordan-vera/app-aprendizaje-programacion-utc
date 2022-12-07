@@ -34,7 +34,7 @@ export class QuizzService {
     }
 
     eliminarQuizzOne(idquizz: number): Observable<any> {
-        return this._http.get(this.url + 'respuestaquizz-delete/' + idquizz);
+        return this._http.get(this.url + 'quizz-delete/' + idquizz);
     }
 
 }

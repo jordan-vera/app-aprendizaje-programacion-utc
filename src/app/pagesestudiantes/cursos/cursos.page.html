@@ -1,0 +1,25 @@
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-10 ps-0">
+        <input type="text" class="form-control" placeholder="Buscar curso" name="nombre" [(ngModel)]="nombre">
+      </div>
+      <div class="col-2 ps-0 pe-0">
+        <button class="btn btn-info w-100" (click)="buscarCursos()">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let x of cursos" [routerLink]="['/panel/curso-show', x.idcurso]">
+        <ion-avatar slot="start">
+          <img src="{{urlImagen+x.imagen}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{x.nombrecurso}}</h2>
+          <h3>{{x.created_at}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

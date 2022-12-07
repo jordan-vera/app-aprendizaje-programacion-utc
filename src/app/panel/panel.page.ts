@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocenteService } from '../servicios/docente.service';
+import { EstudiantesService } from '../servicios/estudiantes.service';
 
 @Component({
   selector: 'app-panel',
@@ -12,21 +13,41 @@ export class PanelPage implements OnInit {
   public tipouser: string = '';
   public titulo: string = 'Desboard';
   public nombres: string = '';
+  public estudiante
 
   constructor(
     private _docenteService: DocenteService,
+    private _estudianteService: EstudiantesService,
     private _router: Router,
   ) {
     this.tipouser = localStorage.getItem('tipouser') + '';
     if (this.tipouser == 'docente') {
       this.getDataDocente();
     } else if (this.tipouser == 'estudiante') {
-
+      this.getDataEstudiante();
     }
   }
 
   ngOnInit() {
+  }
 
+  getDataEstudiante(): void {
+    let idusuario = localStorage.getItem('idusuario') + '';
+    this._estudianteService.getOne(idusuario).subscribe(
+      response => {
+        console.log(response)
+        localStorage.setItem('idestudiante', response.response.idestudiante);
+        this.nombres = response.response.nombres;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  cerrarSesion(): void {
+    this._router.navigate(['/login']);
+    localStorage.removeItem('idusuario');
+    localStorage.removeItem('tipouser');
   }
 
   irHaPaginas(titulo: string, url: string): void {

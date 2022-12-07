@@ -12,6 +12,7 @@ import { ModalAgregarProgramaPageModule } from './modal-agregar-programa/modal-a
 import { ModalAgregarQuizzPageModule } from './modal-agregar-quizz/modal-agregar-quizz.module';
 import { ModalQuizzDetallePageModule } from './modal-quizz-detalle/modal-quizz-detalle.module';
 import { ModalAgregarPuzzlePageModule } from './modal-agregar-puzzle/modal-agregar-puzzle.module';
+import { ModalPuzzleDetallePageModule } from './modal-puzzle-detalle/modal-puzzle-detalle.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ModalAgregarPuzzlePageModule } from './modal-agregar-puzzle/modal-agreg
     ModalAgregarProgramaPageModule,
     ModalAgregarQuizzPageModule,
     ModalQuizzDetallePageModule,
-    ModalAgregarPuzzlePageModule
+    ModalAgregarPuzzlePageModule,
+    ModalPuzzleDetallePageModule
   ],
   declarations: [ClaseShowPage],
 })

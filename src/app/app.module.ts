@@ -18,6 +18,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { QuizzService } from './servicios/quizz.service';
 import { RespuestaquizzService } from './servicios/respuestaquizz.service';
 import { PuzzleService } from './servicios/puzzle.service';
+import { EstudiantesService } from './servicios/estudiantes.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,8 @@ import { PuzzleService } from './servicios/puzzle.service';
     CodigoService,
     QuizzService,
     RespuestaquizzService,
-    PuzzleService
+    PuzzleService,
+    EstudiantesService
   ],
   bootstrap: [AppComponent],
 })

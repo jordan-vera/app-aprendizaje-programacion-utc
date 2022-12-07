@@ -66,7 +66,7 @@ export class ModalQuizzDetallePage implements OnInit {
     this.actualizarRespuesta(this.respuesta2);
     this.actualizarRespuesta(this.respuesta3);
     this.actualizarRespuesta(this.respuesta4);
-    
+
   }
 
   actualizar(dataQuizz: Quizz): void {
@@ -74,7 +74,6 @@ export class ModalQuizzDetallePage implements OnInit {
     dataQuizz.idclase = +dataQuizz.idclase;
     this._quizzService.update(dataQuizz).subscribe(
       response => {
-        console.log(response);
         this.presentToast('top', 'Respuesta actualizada!!');
       }, error => {
         console.log(error);

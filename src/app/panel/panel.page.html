@@ -14,7 +14,7 @@
         <ion-list id="inbox-list" lines="none">
           <ion-menu-toggle auto-hide="false">
 
-            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Desboard', '/panel/desboard')">
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Desboard', '/panel/desboard')" *ngIf="tipouser == 'docente'">
               <ion-icon name="home-outline" slot="start"></ion-icon>
               <ion-label>
                 <label class="font-cairo" style="padding: 0px; margin: 0px;">Desboard</label>
@@ -22,20 +22,50 @@
             </ion-item>
 
 
-            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/cursos')">
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/cursos')" *ngIf="tipouser == 'docente'">
               <ion-icon name="bookmarks-outline" slot="start"></ion-icon>
               <ion-label>
                 <label class="font-cairo" style="padding: 0px; margin: 0px;">Cursos</label>
               </ion-label>
             </ion-item>
 
-            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Clases', '/panel/clases')">
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Clases', '/panel/clases')" *ngIf="tipouser == 'docente'">
               <ion-icon name="today-outline" slot="start"></ion-icon>
               <ion-label>
                 <label class="font-cairo" style="padding: 0px; margin: 0px;">Clases</label>
               </ion-label>
             </ion-item>
 
+            
+
+            <!--Estudiantes-->
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/cursos-estudiantes')" *ngIf="tipouser == 'estudiante'">
+              <ion-icon name="bookmarks-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Cursos</label>
+              </ion-label>
+            </ion-item>
+
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/clases-estudiantes')" *ngIf="tipouser == 'estudiante'">
+              <ion-icon name="today-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Clases</label>
+              </ion-label>
+            </ion-item>
+
+            <ion-item class="opcion font-cairo" (click)="irHaPaginas('Cursos', '/panel/perfil-estudiante')" *ngIf="tipouser == 'estudiante'">
+              <ion-icon name="today-outline" slot="start"></ion-icon>
+              <ion-label>
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Mi perfil</label>
+              </ion-label>
+            </ion-item>
+
+            <ion-item class="opcion font-cairo" (click)="cerrarSesion()">
+              <ion-icon color="danger" name="exit-outline" slot="start"></ion-icon>
+              <ion-label color="danger">
+                <label class="font-cairo" style="padding: 0px; margin: 0px;">Cerrar Sesión</label>
+              </ion-label>
+            </ion-item>
 
           </ion-menu-toggle>
         </ion-list>

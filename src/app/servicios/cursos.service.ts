@@ -28,4 +28,8 @@ export class CursosService {
         return this._http.get(this.url + 'cursos-one/' + idcurso);
     }
 
+    getcursoSearch(nombre: string): Observable<any> {
+        return this._http.get(this.url + 'cursos-search/' + nombre);
+    }
+
 }

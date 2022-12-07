@@ -24,6 +24,12 @@
               <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
             </ion-item>
           </ion-list>
+
+          <div class="text-center">
+            <ion-chip [disabled]="true" *ngIf="!programas" expand="block">
+              No hay resgistros!!
+            </ion-chip>
+          </div>
         </div>
 
       </div>
@@ -44,6 +50,13 @@
               <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
             </ion-item>
           </ion-list>
+
+          <div class="text-center">
+            <ion-chip [disabled]="true" *ngIf="!quizzList" expand="block">
+              No hay resgistros!!
+            </ion-chip>
+          </div>
+
         </div>
 
       </div>
@@ -59,10 +72,18 @@
 
         <div class="pt-0 pb-0">
           <ion-list>
-            <ion-item *ngFor="let x of puzzleList; let i = index" color="light" expand="block">
+            <ion-item *ngFor="let x of puzzleList; let i = index" color="light" expand="block"
+              (click)="setOpenModalPuzzleDetalle(x.idpuzzle)">
               <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
             </ion-item>
           </ion-list>
+
+          <div class="text-center">
+            <ion-chip [disabled]="true" *ngIf="!puzzleList" expand="block">
+              No hay resgistros!!
+            </ion-chip>
+          </div>
+
         </div>
       </div>
     </ion-accordion>

@@ -25,9 +25,9 @@ export class PuzzleService {
         return this._http.post(this.url + 'puzzle-update', params);
     }
 
-    updateimagen(data: Puzzle): Observable<any> {
+    updateimagen(data: Puzzle, anterior: string): Observable<any> {
         let params = JSON.stringify(data);
-        return this._http.post(this.url + 'puzzle-update-imagen', params);
+        return this._http.post(this.url + 'puzzle-update-imagen/' + anterior, params);
     }
 
     getpuzzleAll(idclase: number): Observable<any> {
@@ -38,8 +38,8 @@ export class PuzzleService {
         return this._http.get(this.url + 'puzzle-one/' + idpuzzle);
     }
 
-    eliminarPuzzleOne(idpuzzle: number): Observable<any> {
-        return this._http.get(this.url + 'puzzle-delete/' + idpuzzle);
+    eliminarPuzzleOne(idpuzzle: number, imganterior: string): Observable<any> {
+        return this._http.get(this.url + 'puzzle-delete/' + idpuzzle + '/' + imganterior);
     }
 
 }

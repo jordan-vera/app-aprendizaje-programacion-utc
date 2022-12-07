@@ -33,6 +33,18 @@ const routes: Routes = [
         loadChildren: () => import('./../pagesdocentes/clase-show/clase-show.module').then(m => m.ClaseShowPageModule)
       },
 
+      {
+        path: 'cursos-estudiantes',
+        loadChildren: () => import('./../pagesestudiantes/cursos/cursos.module').then( m => m.CursosPageModule)
+      },
+      {
+        path: 'clases-estudiantes',
+        loadChildren: () => import('./../pagesestudiantes/clases/clases.module').then( m => m.ClasesPageModule)
+      },
+      {
+        path: 'perfil-estudiante',
+        loadChildren: () => import('./../pagesestudiantes/perfil-estudiante/perfil-estudiante.module').then( m => m.PerfilEstudiantePageModule)
+      },
     ]
   },
 ];
