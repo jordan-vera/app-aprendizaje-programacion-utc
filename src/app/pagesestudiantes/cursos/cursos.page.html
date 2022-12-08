@@ -11,7 +11,7 @@
       </div>
     </div>
     <ion-list>
-      <ion-item *ngFor="let x of cursos" [routerLink]="['/panel/curso-show', x.idcurso]">
+      <ion-item *ngFor="let x of cursos" [routerLink]="['/panel/curso-show-estudiantes', x.idcurso]">
         <ion-avatar slot="start">
           <img src="{{urlImagen+x.imagen}}" />
         </ion-avatar>

@@ -15,7 +15,7 @@ export class CursosPage implements OnInit {
   public urlImagen: string = Global.urlArchivos;
 
   constructor(
-    private _cursoService: CursosService
+    private _cursoService: CursosService,
   ) { }
 
   ngOnInit() {

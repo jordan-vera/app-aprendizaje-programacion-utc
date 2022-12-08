@@ -22,8 +22,10 @@ export class PanelPage implements OnInit {
   ) {
     this.tipouser = localStorage.getItem('tipouser') + '';
     if (this.tipouser == 'docente') {
+      localStorage.removeItem('idestudiante');
       this.getDataDocente();
     } else if (this.tipouser == 'estudiante') {
+      localStorage.removeItem('iddocente')
       this.getDataEstudiante();
     }
   }

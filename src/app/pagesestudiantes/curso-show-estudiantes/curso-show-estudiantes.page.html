@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <div class="rounded">
+    <img src="{{urlImage+curso.imagen}}" class="rounded" alt="" srcset="">
+  </div>
+  <h5>{{curso.nombrecurso}}</h5>
+  <small>{{curso.created_at}}</small>
+  <br>
+
+  <div *ngIf="cursoestudiante == null && estado == '' " class="pt-4 pb-2">
+    <button class="btn btn-success w-100"  (click)="unirseAlCurso()">
+      <ion-icon name="accessibility-outline"></ion-icon> Unirse al grupo
+    </button>
+  </div>
+
+  <div class="mt-3 mb-4 pt-2 pb-2 border border-warning text-warning ps-2 pe-2 rounded" *ngIf="estado == 'pendiente'">
+    Tu solicitud de unirte al grupo esta en <b>pendiente</b>
+  </div>
+  
+  <ion-button expand="block" id="open-modal" class="mt-3" color="primary" [disabled]="cursoestudiante == null || estado != 'aprobado' ">
+    <ion-icon name="today-outline" class="me-2"></ion-icon> Clases del curso
+  </ion-button>
+
+</ion-content>

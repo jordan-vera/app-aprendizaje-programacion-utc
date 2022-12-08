@@ -19,6 +19,7 @@ import { QuizzService } from './servicios/quizz.service';
 import { RespuestaquizzService } from './servicios/respuestaquizz.service';
 import { PuzzleService } from './servicios/puzzle.service';
 import { EstudiantesService } from './servicios/estudiantes.service';
+import { CursoEstudianteService } from './servicios/cursoestudiante.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +42,8 @@ import { EstudiantesService } from './servicios/estudiantes.service';
     QuizzService,
     RespuestaquizzService,
     PuzzleService,
-    EstudiantesService
+    EstudiantesService,
+    CursoEstudianteService
   ],
   bootstrap: [AppComponent],
 })
