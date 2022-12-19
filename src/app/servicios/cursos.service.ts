@@ -32,4 +32,8 @@ export class CursosService {
         return this._http.get(this.url + 'cursos-search/' + nombre);
     }
 
+    deletecurso(idcurso: number): Observable<any> {
+        return this._http.get(this.url + 'cursos-delete/' + idcurso);
+    }
+
 }

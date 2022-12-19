@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estudiantes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cancel()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let x of estudiantes" >
+      <ion-label>{{x.nombres}}</ion-label>
+      <ion-button slot="end" *ngIf="x.estado_aceptado == 'pendiente'" (click)="aprobarEstudiante(x.idcurso_estudiante)">
+        Pendiente
+      </ion-button>
+      <ion-chip slot="end" *ngIf="x.estado_aceptado == 'aprobado'" color="success">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-chip>
+    </ion-item>
+  </ion-list>
+</ion-content>

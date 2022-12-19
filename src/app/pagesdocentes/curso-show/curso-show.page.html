@@ -5,16 +5,29 @@
   <h5>{{curso.nombrecurso}}</h5>
   <small>{{curso.created_at}}</small>
   <br>
-  
-  <ion-button expand="block" id="open-modal" class="mt-3" color="primary">
-    <ion-icon name="today-outline" class="me-2"></ion-icon> Clases del curso
-  </ion-button>
 
-  <ion-button expand="block" id="open-modal" class="mt-3" color="primary">
+  <ion-button expand="block" id="open-modal" class="mt-3" color="primary" (click)="openModalEstudianteList()">
     <ion-icon name="people-outline" class="me-2"></ion-icon> Estudiantes en el curso
   </ion-button>
 
-  <ion-button expand="block" id="open-modal" class="mt-3" color="danger">
+  <ion-button expand="block" id="open-modal" class="mt-3" color="danger" (click)="eliminarCurso()">
     <ion-icon name="trash-outline" class="me-2"></ion-icon> Eliminar Curso
   </ion-button>
+
+  <br>
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label><ion-icon name="today-outline" class="me-2"></ion-icon> Clases del curso</ion-label>
+      </ion-item>
+      <div slot="content">
+        <ion-list>
+          <ion-item *ngFor="let x of clases" [routerLink]="['/panel/clase-show', x.idclase]">
+            <ion-label>{{x.nombreclase}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>

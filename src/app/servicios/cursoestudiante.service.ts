@@ -28,4 +28,9 @@ export class CursoEstudianteService {
         return this._http.get(this.url + 'cursoestudiante-por-curso/' + idcurso);
     }
 
+    cambiarestado(data: Cursoestudiante): Observable<any> {
+        let params = JSON.stringify(data);
+        return this._http.post(this.url + 'cambiar-estado-estudiante-curso', params);
+    }
+
 }
