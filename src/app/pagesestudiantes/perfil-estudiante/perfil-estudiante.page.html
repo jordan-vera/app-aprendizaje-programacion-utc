@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>perfil-estudiante</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+    <h5 class="border-bottom pb-2"><ion-icon name="person-circle-outline"></ion-icon> Mi Cuenta</h5>
+    <ion-item class="mt-3" color="light">
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input name="nombres" #nombres="ngModel" [(ngModel)]="estudiante.nombres" required></ion-input>
+    </ion-item>
 
-<ion-content>
+    <ion-item class="mt-2" color="light">
+        <ion-label position="floating">Identificación</ion-label>
+        <ion-input name="identificacion" #identificacion="ngModel" [(ngModel)]="estudiante.identificacion"
+            required></ion-input>
+    </ion-item>
 
+    <ion-item class="mt-2" color="light">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input name="email" #email="ngModel" [(ngModel)]="estudiante.email" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="mt-3" (click)="actualizarEstudiante()">
+        Actualizar
+    </ion-button>
+
+    <hr>
+
+    <h5 class="border-bottom pb-2 mt-4"><ion-icon name="key-outline"></ion-icon> Cambiar contraseña</h5>
+
+    <ion-item class="mt-2" color="light">
+        <ion-label position="floating">Contraseña antigua</ion-label>
+        <ion-input type="password" name="claveantigua" [(ngModel)]="claveantigua" ></ion-input>
+    </ion-item>
+
+    <ion-item class="mt-2" color="light">
+        <ion-label position="floating">Contraseña nueva</ion-label>
+        <ion-input type="password" name="clavenueva" [(ngModel)]="clavenueva" ></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="mt-3" fill="outline" (click)="cambiarContrasena()">
+        Actualizar contraseña
+    </ion-button>
 </ion-content>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Clases } from 'src/app/models/Clases';
 import { Cursoestudiante } from 'src/app/models/Cursoestudiante';
 import { Curso } from 'src/app/models/Cursos';
+import { ClaseService } from 'src/app/servicios/clases.service';
 import { CursoEstudianteService } from 'src/app/servicios/cursoestudiante.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { Global } from 'src/app/servicios/url';
@@ -20,21 +22,34 @@ export class CursoShowEstudiantesPage implements OnInit {
   public cursoestudiante: Cursoestudiante = new Cursoestudiante(0, 0, 0, '');
   public cursoestudianteCreate: Cursoestudiante = new Cursoestudiante(0, 0, 0, '');
   public estado = '';
+  public clasesList: Clases[];
 
   constructor(
     private _route: ActivatedRoute,
     private _cursoService: CursosService,
     private _cursoestudianteService: CursoEstudianteService,
     private toastController: ToastController,
+    private _clasesService: ClaseService
   ) {
     this._route.params.subscribe((params: Params) => {
       this.idcurso = params.idcurso;
       this.getCurso();
       this.getcursoestudiante();
+      this.getClases();
     });
   }
 
   ngOnInit() {
+  }
+
+  getClases(): void {
+    this._clasesService.getclases(this.idcurso).subscribe(
+      response => {
+        this.clasesList = response.response;
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom', msj: string) {
@@ -78,7 +93,6 @@ export class CursoShowEstudiantesPage implements OnInit {
     this._cursoService.getcursoOne(this.idcurso).subscribe(
       response => {
         this.curso = response.response;
-        console.log(this.curso);
       }, error => {
         console.log(error);
       }

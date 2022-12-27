@@ -20,6 +20,19 @@
           <h3>{{x.created_at}}</h3>
         </ion-label>
       </ion-item>
+
+    </ion-list>
+    <ion-list>
+      <ion-list-header> Mis cursos </ion-list-header>
+      <ion-item *ngFor="let x of cursosAprobados" [routerLink]="['/panel/curso-show-estudiantes', x.idcurso]">
+        <ion-avatar slot="start">
+          <img src="{{urlImagen+x.imagen}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{x.nombrecurso}}</h2>
+          <h3>{{x.created_at}}</h3>
+        </ion-label>
+      </ion-item>
     </ion-list>
   </div>
 </ion-content>

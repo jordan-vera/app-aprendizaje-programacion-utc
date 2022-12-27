@@ -7,7 +7,7 @@
   <br>
 
   <div *ngIf="cursoestudiante == null && estado == '' " class="pt-4 pb-2">
-    <button class="btn btn-success w-100"  (click)="unirseAlCurso()">
+    <button class="btn btn-success w-100" (click)="unirseAlCurso()">
       <ion-icon name="accessibility-outline"></ion-icon> Unirse al grupo
     </button>
   </div>
@@ -15,9 +15,20 @@
   <div class="mt-3 mb-4 pt-2 pb-2 border border-warning text-warning ps-2 pe-2 rounded" *ngIf="estado == 'pendiente'">
     Tu solicitud de unirte al grupo esta en <b>pendiente</b>
   </div>
-  
-  <ion-button expand="block" id="open-modal" class="mt-3" color="primary" [disabled]="cursoestudiante == null || estado != 'aprobado' ">
-    <ion-icon name="today-outline" class="me-2"></ion-icon> Clases del curso
-  </ion-button>
+
+  <br>
+  <ion-list *ngIf="cursoestudiante != null || estado == 'aprobado' ">
+    <ion-list-header> Clases del curso </ion-list-header>
+    <ion-item *ngFor="let x of clasesList" [routerLink]="['/panel/clase-one-estudiantes', x.idcurso, x.idclase]">
+      <ion-avatar slot="start">
+        <img src="{{urlImage+x.imagen}}" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{x.nombreclase}}</h2>
+        <h3>{{x.created_at}}</h3>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>

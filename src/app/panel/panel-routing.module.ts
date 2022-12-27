@@ -49,6 +49,10 @@ const routes: Routes = [
         path: 'curso-show-estudiantes/:idcurso',
         loadChildren: () => import('./../pagesestudiantes/curso-show-estudiantes/curso-show-estudiantes.module').then( m => m.CursoShowEstudiantesPageModule)
       },
+      {
+        path: 'clase-one-estudiantes/:idcurso/:idclase',
+        loadChildren: () => import('./../pagesestudiantes/clase-one/clase-one.module').then( m => m.ClaseOnePageModule)
+      },
     ]
   },
 ];

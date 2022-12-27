@@ -24,6 +24,10 @@ export class ProgramaService {
         return this._http.get(this.url + 'programas/' + idclase);
     }
 
+    getprogramasCodigo(idclase: number): Observable<any> {
+        return this._http.get(this.url + 'programas-codigo/' + idclase);
+    }
+
     getprogramaOne(idprograma: number): Observable<any> {
         return this._http.get(this.url + 'programa-one/' + idprograma);
     }

@@ -1,0 +1,78 @@
+<ion-content class="ion-padding">
+  <div>
+    <ion-button color="light" size="small" [routerLink]="['/panel/curso-show-estudiantes', idcurso]">
+      <ion-icon name="arrow-back-outline"></ion-icon> Atrás
+    </ion-button>
+    <br>
+  </div>
+  <br>
+
+  <ion-item color="secondary" *ngIf="existePrograma == true">
+    <ion-label>Programas</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let xl of programasCodigo; let i = index" color="light" expand="block">
+      <ion-label>{{i+1}}. {{xl.titulo}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" fill="outline" size="small" id="open-modal" expand="block">
+    Resolver preguntas
+  </ion-button>
+
+  <ion-item color="secondary" *ngIf="existeQuizz == true">
+    <ion-label>Quizz</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let x of quizzList; let i = index" color="light" expand="block">
+      <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item color="secondary" *ngIf="existePuzzle == true">
+    <ion-label>Puzzle</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let x of puzzleList; let i = index" color="light" expand="block">
+      <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Programas</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+
+      <div *ngFor="let xl of programasCodigo; let i = index">
+        <ion-item color="primary" expand="block">
+          <ion-label><b>{{i+1}}. {{xl.titulo}}</b></ion-label>
+        </ion-item>
+        <div class="mb-2 border-bottom" *ngFor="let x of xl.codigos; let il = index">
+
+          <div style="height: 100px">
+            <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="x.fragmentocodigo">
+            </ngx-monaco-editor>
+          </div>
+          <ion-item class="pt-0 mt-0">
+            <ion-checkbox slot="start" name="{{x.idcodigo}}" id="{{x.idcodigo}}" (click)="seleccionCodigo(x.idcodigo, x.idprograma)">
+            </ion-checkbox>
+            <ion-label>Es correcta</ion-label>
+          </ion-item>
+        </div>
+      </div>
+
+      <ion-button expand="block" color="success">
+        Finalizar Respuesta
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

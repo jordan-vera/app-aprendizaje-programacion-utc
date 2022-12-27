@@ -37,7 +37,6 @@ export class PanelPage implements OnInit {
     let idusuario = localStorage.getItem('idusuario') + '';
     this._estudianteService.getOne(idusuario).subscribe(
       response => {
-        console.log(response)
         localStorage.setItem('idestudiante', response.response.idestudiante);
         this.nombres = response.response.nombres;
       }, error => {
