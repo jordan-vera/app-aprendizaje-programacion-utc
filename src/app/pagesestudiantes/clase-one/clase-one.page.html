@@ -63,16 +63,18 @@
             </ngx-monaco-editor>
           </div>
           <ion-item class="pt-0 mt-0">
-            <ion-checkbox slot="start" name="{{x.idcodigo}}" id="{{x.idcodigo}}" (click)="seleccionCodigo(x.idcodigo, x.idprograma)">
+            <ion-checkbox slot="start" name="{{x.idcodigo}}" id="{{x.idcodigo}}"
+              (click)="seleccionCodigo(x.idcodigo, x.idprograma)">
             </ion-checkbox>
             <ion-label>Es correcta</ion-label>
           </ion-item>
         </div>
       </div>
-
-      <ion-button expand="block" color="success">
+      <br>
+      <ion-button expand="block" color="success" (click)="guardarRespuestas()">
         Finalizar Respuesta
       </ion-button>
+      <br>
     </ion-content>
   </ng-template>
 </ion-modal>

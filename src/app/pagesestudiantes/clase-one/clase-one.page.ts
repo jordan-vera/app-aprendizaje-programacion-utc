@@ -8,8 +8,12 @@ import { ClaseService } from 'src/app/servicios/clases.service';
 import { ProgramaService } from 'src/app/servicios/programa.service';
 import { PuzzleService } from 'src/app/servicios/puzzle.service';
 import { QuizzService } from 'src/app/servicios/quizz.service';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { EstudianteProgramasService } from 'src/app/servicios/estudianteprogramas.service';
+import { RespuestaCodigoService } from 'src/app/servicios/repuestacodigo.service';
+import { EstudianteProgramas } from 'src/app/models/Estudiantesprogramas';
+import { RespuestaCodigo } from 'src/app/models/Respuestacodigo';
 
 @Component({
   selector: 'app-clase-one',
@@ -36,12 +40,19 @@ export class ClaseOnePage implements OnInit {
 
   public procesoRespuesta: any[] = [];
 
+  //guardarRespuestas
+  public estudianteProgramas: EstudianteProgramas = new EstudianteProgramas(0, 0, '');
+  public respuestaCodigo: RespuestaCodigo = new RespuestaCodigo(0, 0, 0, '');
+
   constructor(
     private _route: ActivatedRoute,
     private _programaService: ProgramaService,
     private _quizzService: QuizzService,
     private _puzzleService: PuzzleService,
     private _claseService: ClaseService,
+    private toastController: ToastController,
+    private _estudianteprogramasServices: EstudianteProgramasService,
+    private _respuestacodigoService: RespuestaCodigoService
   ) {
     this._route.params.subscribe((params: Params) => {
       this.idcurso = params.idcurso;
@@ -53,29 +64,72 @@ export class ClaseOnePage implements OnInit {
   ngOnInit() {
   }
 
+  guardarRespuestas(): void {
+    if (this.procesoRespuesta.length == this.programas.length) {
+      for (let x = 0; x < this.procesoRespuesta.length; x++) {
+        this.guardarEstudiantePrograma(this.procesoRespuesta[x].idprograma, this.procesoRespuesta[x].idcodigo);
+      }
+    } else {
+      this.presentToast('top', 'Tiene que responder todas las preguntas');
+    }
+  }
+
+  guardarEstudiantePrograma(idprograma: number, idcodigo: number): void {
+    this.estudianteProgramas.idprograma = idprograma;
+    this._estudianteprogramasServices.create(this.estudianteProgramas).subscribe(
+      response => {
+        this.guardarRespuestaCodigo(response.response, idcodigo);
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  guardarRespuestaCodigo(idestudianteprogramas, idcodigo): void {
+    this.respuestaCodigo.idestudiante_programas = idestudianteprogramas;
+    this.respuestaCodigo.idcodigo = idcodigo;
+    this._respuestacodigoService.create(this.respuestaCodigo).subscribe(
+      response => {
+
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', msj: string) {
+    const toast = await this.toastController.create({
+      message: msj,
+      duration: 1500,
+      position: position
+    });
+    await toast.present();
+  }
+
   seleccionCodigo(idcodigo, idprograma): void {
-    for(let i = 0; i < this.programasCodigo.length; i++) {
-      if(this.programasCodigo[i].idprograma == idprograma) {
-        for(let j = 0; j < this.programasCodigo[i].codigos.length; j++){
-          if(this.programasCodigo[i].codigos[j].idcodigo != idcodigo){
+    for (let i = 0; i < this.programasCodigo.length; i++) {
+      if (this.programasCodigo[i].idprograma == idprograma) {
+        for (let j = 0; j < this.programasCodigo[i].codigos.length; j++) {
+          if (this.programasCodigo[i].codigos[j].idcodigo != idcodigo) {
             var checkBox = document.getElementById(this.programasCodigo[i].codigos[j].idcodigo) as HTMLInputElement;
             checkBox.checked = false;
           } else {
-            if(this.procesoRespuesta.length > 0){
+            if (this.procesoRespuesta.length > 0) {
               var cont = this.procesoRespuesta.length;
-           
-              for(let x = 0; x < cont; x++) {
-                if(this.procesoRespuesta[x].idprograma == idprograma) {
-                  console.log("eliminacion en posicion " + x)
+              var repetidoEncontrado = 'false';
+              for (let x = 0; x < cont; x++) {
+                if (this.procesoRespuesta[x].idprograma == idprograma) {
                   this.procesoRespuesta = this.procesoRespuesta.filter((item) => item.idprograma !== this.procesoRespuesta[x].idprograma)
-                  this.procesoRespuesta.push({"idcodigo":idcodigo, "idprograma":idprograma})
-                } else {
-                  this.procesoRespuesta.push({"idcodigo":idcodigo, "idprograma":idprograma})
+                  this.procesoRespuesta.push({ "idcodigo": idcodigo, "idprograma": idprograma });
+                  repetidoEncontrado = 'true';
                 }
               }
-
+              if (repetidoEncontrado == 'false') {
+                this.procesoRespuesta.push({ "idcodigo": idcodigo, "idprograma": idprograma })
+              }
             } else {
-              this.procesoRespuesta.push({"idcodigo":idcodigo, "idprograma":idprograma})
+              console.log("push 3");
+              this.procesoRespuesta.push({ "idcodigo": idcodigo, "idprograma": idprograma })
             }
           }
         }
