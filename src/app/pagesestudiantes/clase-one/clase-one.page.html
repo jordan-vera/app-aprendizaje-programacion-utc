@@ -15,7 +15,7 @@
       <ion-label>{{i+1}}. {{xl.titulo}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" fill="outline" size="small" id="open-modal" expand="block">
+  <ion-button expand="block" fill="outline" size="small" id="open-modal" expand="block" *ngIf="existePrograma == true">
     Resolver preguntas
   </ion-button>
 
@@ -37,6 +37,25 @@
     </ion-item>
   </ion-list>
 
+  <!--Msj no existen preguntas-->
+  <div class="text-center" *ngIf="existePrograma != true">
+    <h5>No existen clases para realizar</h5>
+  </div>
+
+  <br>
+  <div class="border-bottom pb-1 text-info border-info">
+    <small><b>Clases realizadas</b></small>
+  </div>
+  <ion-list>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Programas</b> </ion-list-header>
+    <ion-item *ngFor="let x of programasRespondidos" color="light">
+      <ion-label>
+        <h3>{{x.titulo}}</h3>
+        <p *ngIf="x.escorrecta == true" class="text-success">Correcto</p>
+        <p *ngIf="x.escorrecta == false" class="text-danger">Incorrecto</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 

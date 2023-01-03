@@ -24,4 +24,7 @@ export class EstudianteProgramasService {
         return this._http.get(this.url + 'estudianteprograma-programa/' + idprograma);
     }
 
+    getestudianteprogramaIdestudiante(idestudiante: number): Observable<any> {
+        return this._http.get(this.url + 'estudianteprograma-estudiante/' + idestudiante);
+    }
 }

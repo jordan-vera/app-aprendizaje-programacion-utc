@@ -33,6 +33,7 @@ export class ClaseOnePage implements OnInit {
   public puzzleList: Puzzle[];
 
   public programasCodigo: any[] = [];
+  public programasRespondidos: any[] = [];
 
   public existePrograma: boolean = true;
   public existeQuizz: boolean = true;
@@ -40,8 +41,11 @@ export class ClaseOnePage implements OnInit {
 
   public procesoRespuesta: any[] = [];
 
+  public idestudiante: number = 0;
+  public existenProgramasResueltos: boolean = false;
+
   //guardarRespuestas
-  public estudianteProgramas: EstudianteProgramas = new EstudianteProgramas(0, 0, '');
+  public estudianteProgramas: EstudianteProgramas = new EstudianteProgramas(0, 0, 0, '');
   public respuestaCodigo: RespuestaCodigo = new RespuestaCodigo(0, 0, 0, '');
 
   constructor(
@@ -57,6 +61,8 @@ export class ClaseOnePage implements OnInit {
     this._route.params.subscribe((params: Params) => {
       this.idcurso = params.idcurso;
       this.idclase = params.idclase;
+      this.idestudiante = +localStorage.getItem('idestudiante');
+      this.getProgramasResueltos();
       this.getClase();
     });
   }
@@ -64,21 +70,39 @@ export class ClaseOnePage implements OnInit {
   ngOnInit() {
   }
 
+  getProgramasResueltos(): void {
+    this._estudianteprogramasServices.getestudianteprogramaIdestudiante(this.idestudiante).subscribe(
+      response => {
+        console.log(response)
+      }, error => {
+        console.log(error)
+      }
+    )
+  }
+
   guardarRespuestas(): void {
     if (this.procesoRespuesta.length == this.programas.length) {
       for (let x = 0; x < this.procesoRespuesta.length; x++) {
-        this.guardarEstudiantePrograma(this.procesoRespuesta[x].idprograma, this.procesoRespuesta[x].idcodigo);
+        this.guardarEstudiantePrograma(this.procesoRespuesta[x].idprograma, this.procesoRespuesta[x].idcodigo, x + 1);
       }
     } else {
       this.presentToast('top', 'Tiene que responder todas las preguntas');
     }
   }
 
-  guardarEstudiantePrograma(idprograma: number, idcodigo: number): void {
+  guardarEstudiantePrograma(idprograma: number, idcodigo: number, indice: number): void {
     this.estudianteProgramas.idprograma = idprograma;
+    this.estudianteProgramas.idestudiante = this.idestudiante;
     this._estudianteprogramasServices.create(this.estudianteProgramas).subscribe(
       response => {
         this.guardarRespuestaCodigo(response.response, idcodigo);
+        if (indice == this.procesoRespuesta.length) {
+          this.presentToast('top', 'Proceso finalizado con exito');
+          setTimeout(() => {
+            this.modal.dismiss(null, 'cancel');
+            this.getClase();
+          }, 1000);
+        }
       }, error => {
         console.log(error);
       }
@@ -135,11 +159,7 @@ export class ClaseOnePage implements OnInit {
         }
       }
     }
-    console.log(this.procesoRespuesta)
   }
-
-
-
 
   ionViewDidEnter() {
     this.editorOptions = { theme: 'vs-dark', language: 'javascript' };
@@ -184,21 +204,23 @@ export class ClaseOnePage implements OnInit {
     this.programasCodigo = [];
     this._programaService.getprogramasCodigo(this.idclase).subscribe(
       response => {
-        if (response.response[0]) {
+        this.programasRespondidos = response.respondidas;
+        if (response.norespondidas[0]) {
           this.existePrograma = true;
-          this.programas = response.response; // pendiente a eliminar
-          for (let i = 0; i < response.response.length; i++) {
+          console.log(response)
+          this.programas = response.norespondidas; // pendiente a eliminar
+          for (let i = 0; i < response.norespondidas.length; i++) {
             for (let j = 0; j < response.codigo.length; j++) {
-              if (response.response[i].idprograma == response.codigo[j].idprograma) {
+              if (response.norespondidas[i].idprograma == response.codigo[j].idprograma) {
                 arrayCodigos.push(response.codigo[j]);
               }
             }
             this.programasCodigo.push(
               {
-                "idprograma": response.response[i].idprograma,
-                "titulo": response.response[i].titulo,
-                "idclase": response.response[i].idclase,
-                "created_at": response.response[i].created_at,
+                "idprograma": response.norespondidas[i].idprograma,
+                "titulo": response.norespondidas[i].titulo,
+                "idclase": response.norespondidas[i].idclase,
+                "created_at": response.norespondidas[i].created_at,
                 "codigos": arrayCodigos,
               }
             )
