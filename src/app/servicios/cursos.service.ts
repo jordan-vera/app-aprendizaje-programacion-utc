@@ -24,6 +24,10 @@ export class CursosService {
         return this._http.get(this.url + 'cursos/' + iddocente);
     }
 
+    getcursoCount(iddocente: number): Observable<any> {
+        return this._http.get(this.url + 'cursos-count/' + iddocente);
+    }
+
     getcursoOne(idcurso: number): Observable<any> {
         return this._http.get(this.url + 'cursos-one/' + idcurso);
     }

@@ -19,6 +19,10 @@ export class EstudiantesService {
         return this._http.get(this.url + 'estudiante/' + idusuario);
     }
 
+    getCountPorDocente(iddocente: string): Observable<any> {
+        return this._http.get(this.url + 'estudiante-count-docente/' + iddocente);
+    }
+
     update(data: Estudiante): Observable<any> {
         let params = JSON.stringify(data);
         return this._http.post(this.url + 'estudiante-update', params);

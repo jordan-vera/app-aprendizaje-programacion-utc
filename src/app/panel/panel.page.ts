@@ -13,7 +13,6 @@ export class PanelPage implements OnInit {
   public tipouser: string = '';
   public titulo: string = 'Desboard';
   public nombres: string = '';
-  public estudiante
 
   constructor(
     private _docenteService: DocenteService,
@@ -21,6 +20,7 @@ export class PanelPage implements OnInit {
     private _router: Router,
   ) {
     this.tipouser = localStorage.getItem('tipouser') + '';
+    console.log(this.tipouser)
     if (this.tipouser == 'docente') {
       localStorage.removeItem('idestudiante');
       this.getDataDocente();

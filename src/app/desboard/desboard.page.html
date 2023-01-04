@@ -1,3 +1,89 @@
-<ion-content>
-  desboard
+<ion-content class="ion-padding">
+  <div class="text-success">
+    <h5 class="pt-0"> 
+      <b> {{nombre}}</b>
+    </h5>
+    <ion-icon name="person-circle-outline" class="mb-0 pb-0" style="font-size: xx-large; position: absolute; right: 5px; top: 10px;"></ion-icon>
+  </div>
+
+  <br>
+  
+  <div *ngIf="tipouser == 'docente'">
+    <div class="row">
+      <div class="col-6 ps-1 pe-1">
+        <ion-card color="secondary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="bookmarks-outline" ></ion-icon></ion-card-title>
+            <ion-card-title>Cursos</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h1>{{countCursoDocente}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="col-6 ps-1 pe-1">
+        <ion-card color="tertiary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="today-outline" ></ion-icon></ion-card-title>
+            <ion-card-title>Clases</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h1>{{countClasesDocente}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6 ps-1 pe-1">
+        <ion-card color="primary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="people-outline"></ion-icon></ion-card-title>
+            <ion-card-title>Estudiantes</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h1>{{countEstudianteDocente}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="tipouser == 'estudiante'">
+    <div class="row">
+      <div class="col-6 ps-1 pe-1">
+        <ion-card color="secondary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="bookmarks-outline" ></ion-icon></ion-card-title>
+            <ion-card-title>Cursos</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h2>Pendiente</h2>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="col-6 ps-1 pe-1">
+        <ion-card color="tertiary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="today-outline" ></ion-icon></ion-card-title>
+            <ion-card-title>Clases</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h2>Pendiente</h2>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    
+  </div>
+  
 </ion-content>

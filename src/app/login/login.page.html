@@ -1,23 +1,28 @@
 <ion-content class="ion-padding">
 
-  <br>
-  <h4>Iniciar Sesión</h4>
-  <br>
 
-  <ion-item>
+
+  <div class="text-center">
+    <img src="../../assets/loginusuario.png" class="w-50">
+
+    <br> <br>
+    <h4 class="mb-3"><b>Iniciar Sesión</b></h4>
+  </div>
+
+  <ion-item color="light">
     <ion-label position="floating">Usuario</ion-label>
     <ion-input required type="text" name="nick" [(ngModel)]="nick"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-item>
+  <ion-item color="light">
     <ion-label position="floating">Contraseña</ion-label>
     <ion-input required type="password" name="clave" [(ngModel)]="clave"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="block" (click)="ingresar()">Ingresar</ion-button>
+  <ion-button  expand="block" (click)="ingresar()">Ingresar</ion-button>
 
 </ion-content>

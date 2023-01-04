@@ -24,6 +24,10 @@ export class ClaseService {
         return this._http.get(this.url + 'clases/' + idcurso);
     }
 
+    getCountPorDocente(iddocente: number): Observable<any> {
+        return this._http.get(this.url + 'clases-count-docente/' + iddocente);
+    }
+
     getcursoOne(idclase: number): Observable<any> {
         return this._http.get(this.url + 'clase-one/' + idclase);
     }
