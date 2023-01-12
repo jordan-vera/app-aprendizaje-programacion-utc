@@ -17,6 +17,7 @@ export class DesboardPage implements OnInit {
   public countCursoDocente: number = 0;
   public countClasesDocente: number = 0;
   public countEstudianteDocente: number = 0;
+  public countCursoEstudiante: number = 0;
 
   constructor(
     private _docenteService: DocenteService,
@@ -43,6 +44,7 @@ export class DesboardPage implements OnInit {
     this._estudianteService.getOne(idusuario).subscribe(
       response => {
         this.nombre = response.response.nombres;
+        this.getCountCursoEstudiante(response.response.idestudiante)
       }, error => {
         console.log(error);
       }
@@ -89,6 +91,17 @@ export class DesboardPage implements OnInit {
     this._estudianteService.getCountPorDocente(iddocente).subscribe(
       response => {
         this.countEstudianteDocente = response.response;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getCountCursoEstudiante(idestudiante: number): void {
+    this._cursoService.getcursoCountEstudiante(idestudiante).subscribe(
+      response => {
+        console.log(response)
+        this.countCursoEstudiante = response.response;
       }, error => {
         console.log(error);
       }

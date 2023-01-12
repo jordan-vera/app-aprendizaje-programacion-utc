@@ -28,6 +28,10 @@ export class CursosService {
         return this._http.get(this.url + 'cursos-count/' + iddocente);
     }
 
+    getcursoCountEstudiante(idestudiante: number): Observable<any> {
+        return this._http.get(this.url + 'cursos-count-estudiantes/' + idestudiante);
+    }
+
     getcursoOne(idcurso: number): Observable<any> {
         return this._http.get(this.url + 'cursos-one/' + idcurso);
     }
