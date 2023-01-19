@@ -8,12 +8,13 @@ import { ClaseService } from 'src/app/servicios/clases.service';
 import { ProgramaService } from 'src/app/servicios/programa.service';
 import { PuzzleService } from 'src/app/servicios/puzzle.service';
 import { QuizzService } from 'src/app/servicios/quizz.service';
-import { IonModal, ToastController } from '@ionic/angular';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { EstudianteProgramasService } from 'src/app/servicios/estudianteprogramas.service';
 import { RespuestaCodigoService } from 'src/app/servicios/repuestacodigo.service';
 import { EstudianteProgramas } from 'src/app/models/Estudiantesprogramas';
 import { RespuestaCodigo } from 'src/app/models/Respuestacodigo';
+import { ModalResolucionQuizzPage } from './modal-resolucion-quizz/modal-resolucion-quizz.page';
 
 @Component({
   selector: 'app-clase-one',
@@ -56,7 +57,8 @@ export class ClaseOnePage implements OnInit {
     private _claseService: ClaseService,
     private toastController: ToastController,
     private _estudianteprogramasServices: EstudianteProgramasService,
-    private _respuestacodigoService: RespuestaCodigoService
+    private _respuestacodigoService: RespuestaCodigoService,
+    public modalController: ModalController
   ) {
     this._route.params.subscribe((params: Params) => {
       this.idcurso = params.idcurso;
@@ -68,6 +70,17 @@ export class ClaseOnePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async modalResolucionQuizz() {
+    const modal = await this.modalController.create({
+      component: ModalResolucionQuizzPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'idclase': this.idclase,
+      }
+    });
+    return await modal.present();
   }
 
   getProgramasResueltos(): void {

@@ -8,6 +8,7 @@ import { ClaseOnePageRoutingModule } from './clase-one-routing.module';
 
 import { ClaseOnePage } from './clase-one.page';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { ModalResolucionQuizzPageModule } from './modal-resolucion-quizz/modal-resolucion-quizz.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
     IonicModule,
     ClaseOnePageRoutingModule,
     MonacoEditorModule,
+    ModalResolucionQuizzPageModule
   ],
   declarations: [ClaseOnePage]
 })

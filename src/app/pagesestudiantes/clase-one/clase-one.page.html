@@ -27,6 +27,10 @@
       <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
     </ion-item>
   </ion-list>
+  <ion-button expand="block" fill="outline" size="small" *ngIf="existeQuizz == true" (click)="modalResolucionQuizz()">
+    Resolver preguntas
+  </ion-button>
+  
 
   <ion-item color="secondary" *ngIf="existePuzzle == true">
     <ion-label>Puzzle</ion-label>

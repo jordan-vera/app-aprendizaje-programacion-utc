@@ -14,7 +14,10 @@ const routes: Routes = [
     path: 'panel',
     loadChildren: () => import('./panel/panel.module').then( m => m.PanelPageModule)
   },
-  
+  {
+    path: '',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
   
   
 ];

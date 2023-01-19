@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ClaseOnePage
+  },
+  {
+    path: 'modal-resolucion-quizz',
+    loadChildren: () => import('./modal-resolucion-quizz/modal-resolucion-quizz.module').then( m => m.ModalResolucionQuizzPageModule)
   }
 ];
 

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Resolver quizz</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cancel()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngFor="let x of respuestasQuizz; let i = index">
+    <ion-item color="primary" expand="block">
+      <ion-label><b>{{i+1}}. {{x.titulo}}</b></ion-label>
+    </ion-item>
+    <div class="mb-2 border-bottom" *ngFor="let xl of x.respuestas; let il = index">
+      <ion-item class="pt-0 mt-0">
+        <ion-checkbox slot="start" name="{{xl.idrespuesta}}" id="{{x.idrespuesta}}">
+        </ion-checkbox>
+        <p>{{xl.respuesta}}</p>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
