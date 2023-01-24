@@ -15,6 +15,8 @@ import { RespuestaCodigoService } from 'src/app/servicios/repuestacodigo.service
 import { EstudianteProgramas } from 'src/app/models/Estudiantesprogramas';
 import { RespuestaCodigo } from 'src/app/models/Respuestacodigo';
 import { ModalResolucionQuizzPage } from './modal-resolucion-quizz/modal-resolucion-quizz.page';
+import { ModalResolucionPuzzlePage } from './modal-resolucion-puzzle/modal-resolucion-puzzle.page';
+import { EstudianteRespuestaPuzzleService } from 'src/app/servicios/estudianterespuestapuzzle.service';
 
 @Component({
   selector: 'app-clase-one',
@@ -32,15 +34,20 @@ export class ClaseOnePage implements OnInit {
   public programas: Programa[];
   public quizzList: Quizz[];
   public puzzleList: Puzzle[];
+  public puzzle: Puzzle[] = [];
+  public puzzleRespondido: Puzzle[] = [];
 
   public programasCodigo: any[] = [];
   public programasRespondidos: any[] = [];
+
+  public quizzRespondidos: any[] = [];
 
   public existePrograma: boolean = true;
   public existeQuizz: boolean = true;
   public existePuzzle: boolean = true;
 
   public procesoRespuesta: any[] = [];
+  public respuestasQuizz: any[] = [];
 
   public idestudiante: number = 0;
   public existenProgramasResueltos: boolean = false;
@@ -58,7 +65,8 @@ export class ClaseOnePage implements OnInit {
     private toastController: ToastController,
     private _estudianteprogramasServices: EstudianteProgramasService,
     private _respuestacodigoService: RespuestaCodigoService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public _estudianteRespuestaPuzzleService: EstudianteRespuestaPuzzleService
   ) {
     this._route.params.subscribe((params: Params) => {
       this.idcurso = params.idcurso;
@@ -72,12 +80,25 @@ export class ClaseOnePage implements OnInit {
   ngOnInit() {
   }
 
+  async modalResolucionPuzzle(idpuzzle) {
+    const modal = await this.modalController.create({
+      component: ModalResolucionPuzzlePage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'idpuzzle': idpuzzle,
+        'idestudiante': this.idestudiante,
+      }
+    });
+    return await modal.present();
+  }
+
   async modalResolucionQuizz() {
     const modal = await this.modalController.create({
       component: ModalResolucionQuizzPage,
       cssClass: 'my-custom-class',
       componentProps: {
         'idclase': this.idclase,
+        'idestudiante': this.idestudiante,
       }
     });
     return await modal.present();
@@ -86,7 +107,6 @@ export class ClaseOnePage implements OnInit {
   getProgramasResueltos(): void {
     this._estudianteprogramasServices.getestudianteprogramaIdestudiante(this.idestudiante).subscribe(
       response => {
-        console.log(response)
       }, error => {
         console.log(error)
       }
@@ -165,7 +185,6 @@ export class ClaseOnePage implements OnInit {
                 this.procesoRespuesta.push({ "idcodigo": idcodigo, "idprograma": idprograma })
               }
             } else {
-              console.log("push 3");
               this.procesoRespuesta.push({ "idcodigo": idcodigo, "idprograma": idprograma })
             }
           }
@@ -182,11 +201,38 @@ export class ClaseOnePage implements OnInit {
     this._puzzleService.getpuzzleAll(this.idclase).subscribe(
       response => {
         if (response.response[0]) {
-          this.existePuzzle = true;
           this.puzzleList = response.response;
+          this.getPuzzLeResueltos();
+        } else {
+          this.puzzleList = null;
+        }
+        
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getPuzzLeResueltos(): void {
+    this._estudianteRespuestaPuzzleService.getporestudiante(this.idestudiante).subscribe(
+      response => {
+        var data = response.response;
+        this.puzzleRespondido = data;
+        for (let i = 0; i < this.puzzleList.length; i++) {
+          var encontrado = false;
+          for (let j = 0; j < data.length; j++) {
+            if (this.puzzleList[i].idpuzzle == data[j].idpuzzle) {
+              encontrado = true;
+            }
+          }
+          if(encontrado == false){
+            this.puzzle.push(this.puzzleList[i]);
+          }
+        }
+        if(this.puzzle.length > 0){
+          this.existePuzzle = true;
         } else {
           this.existePuzzle = false;
-          this.puzzleList = null;
         }
       }, error => {
         console.log(error);
@@ -195,15 +241,36 @@ export class ClaseOnePage implements OnInit {
   }
 
   getQuizzList(): void {
-    this._quizzService.getquizzAll(this.idclase).subscribe(
+    var arrayRespuestaQuizz = [];
+    this.respuestasQuizz = [];
+    this._quizzService.getquizzRespuesta(this.idclase, this.idestudiante).subscribe(
       response => {
-        if (response.response[0]) {
+        this.quizzRespondidos = response.respondidas;
+        if (response.norespondidas[0]) {
           this.existeQuizz = true;
-          this.quizzList = response.response;
+          this.quizzList = response.norespondidas;
+          for (let i = 0; i < response.norespondidas.length; i++) {
+            for (let j = 0; j < response.respuestaquizz.length; j++) {
+              if (response.norespondidas[i].idquizz == response.respuestaquizz[j].idquizz) {
+                arrayRespuestaQuizz.push(response.respuestaquizz[j]);
+              }
+            }
+            this.respuestasQuizz.push(
+              {
+                "idquizz": response.norespondidas[i].idprograma,
+                "titulo": response.norespondidas[i].titulo,
+                "idclase": response.norespondidas[i].idclase,
+                "created_at": response.norespondidas[i].created_at,
+                "respuestas": arrayRespuestaQuizz,
+              }
+            )
+            arrayRespuestaQuizz = [];
+          }
         } else {
-          this.existeQuizz = false;
           this.quizzList = null;
+          this.existeQuizz = false;
         }
+
         this.getProgramas();
         this.getListPuzzle();
       }, error => {
@@ -215,12 +282,11 @@ export class ClaseOnePage implements OnInit {
   getProgramas(): void {
     var arrayCodigos = [];
     this.programasCodigo = [];
-    this._programaService.getprogramasCodigo(this.idclase).subscribe(
+    this._programaService.getprogramasCodigo(this.idclase, this.idestudiante).subscribe(
       response => {
         this.programasRespondidos = response.respondidas;
         if (response.norespondidas[0]) {
           this.existePrograma = true;
-          console.log(response)
           this.programas = response.norespondidas; // pendiente a eliminar
           for (let i = 0; i < response.norespondidas.length; i++) {
             for (let j = 0; j < response.codigo.length; j++) {
@@ -243,7 +309,6 @@ export class ClaseOnePage implements OnInit {
           this.programas = null;
           this.existePrograma = false;
         }
-        console.log(this.procesoRespuesta);
       }, error => {
         console.log(error);
       }

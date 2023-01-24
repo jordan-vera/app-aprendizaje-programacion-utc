@@ -22,6 +22,9 @@ import { EstudiantesService } from './servicios/estudiantes.service';
 import { CursoEstudianteService } from './servicios/cursoestudiante.service';
 import { EstudianteProgramasService } from './servicios/estudianteprogramas.service';
 import { RespuestaCodigoService } from './servicios/repuestacodigo.service';
+import { EstudianteQuizzService } from './servicios/estudiantequizz.service';
+import { EstudianteRespuestaQuizzService } from './servicios/estudianterespuestaquizz.service';
+import { EstudianteRespuestaPuzzleService } from './servicios/estudianterespuestapuzzle.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +50,10 @@ import { RespuestaCodigoService } from './servicios/repuestacodigo.service';
     EstudiantesService,
     CursoEstudianteService,
     EstudianteProgramasService,
-    RespuestaCodigoService
+    RespuestaCodigoService,
+    EstudianteQuizzService,
+    EstudianteRespuestaQuizzService,
+    EstudianteRespuestaPuzzleService
   ],
   bootstrap: [AppComponent],
 })

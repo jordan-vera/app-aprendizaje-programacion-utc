@@ -30,13 +30,14 @@
   <ion-button expand="block" fill="outline" size="small" *ngIf="existeQuizz == true" (click)="modalResolucionQuizz()">
     Resolver preguntas
   </ion-button>
-  
+
 
   <ion-item color="secondary" *ngIf="existePuzzle == true">
     <ion-label>Puzzle</ion-label>
   </ion-item>
   <ion-list>
-    <ion-item *ngFor="let x of puzzleList; let i = index" color="light" expand="block">
+    <ion-item *ngFor="let x of puzzle; let i = index" color="light" expand="block"
+      (click)="modalResolucionPuzzle(x.idpuzzle)">
       <ion-label>{{i+1}}. {{x.titulo}}</ion-label>
     </ion-item>
   </ion-list>
@@ -57,6 +58,24 @@
         <h3>{{x.titulo}}</h3>
         <p *ngIf="x.escorrecta == true" class="text-success">Correcto</p>
         <p *ngIf="x.escorrecta == false" class="text-danger">Incorrecto</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Quizz</b> </ion-list-header>
+    <ion-item *ngFor="let x of quizzRespondidos" color="light">
+      <ion-label>
+        <h3>{{x.titulo}}</h3>
+        <p *ngIf="x.escorrecta == true" class="text-success">Correcto</p>
+        <p *ngIf="x.escorrecta == false" class="text-danger">Incorrecto</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Puzzle</b> </ion-list-header>
+    <ion-item *ngFor="let x of puzzleRespondido" color="light">
+      <ion-label>
+        <h3><b>Puntaje: </b>{{x.puntaje}}</h3>
       </ion-label>
     </ion-item>
   </ion-list>

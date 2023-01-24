@@ -29,8 +29,8 @@ export class QuizzService {
         return this._http.get(this.url + 'quizz-all/' + idclase);
     }
 
-    getquizzRespuesta(idclase: number): Observable<any> {
-        return this._http.get(this.url + 'quizz-all-respuesta/' + idclase);
+    getquizzRespuesta(idclase: number, idestudiante: number): Observable<any> {
+        return this._http.get(this.url + 'quizz-all-respuesta/' + idclase + '/' + idestudiante);
     }
 
     getQuizzOne(idquizz: number): Observable<any> {
