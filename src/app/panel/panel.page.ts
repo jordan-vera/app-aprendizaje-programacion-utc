@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DocenteService } from '../servicios/docente.service';
 import { EstudiantesService } from '../servicios/estudiantes.service';
 
@@ -18,16 +18,21 @@ export class PanelPage implements OnInit {
     private _docenteService: DocenteService,
     private _estudianteService: EstudiantesService,
     private _router: Router,
+    private _route: ActivatedRoute,
   ) {
-    this.tipouser = localStorage.getItem('tipouser') + '';
-    console.log(this.tipouser)
-    if (this.tipouser == 'docente') {
-      localStorage.removeItem('idestudiante');
-      this.getDataDocente();
-    } else if (this.tipouser == 'estudiante') {
-      localStorage.removeItem('iddocente')
-      this.getDataEstudiante();
-    }
+    this._route.params.subscribe((params: Params) => {
+      this.tipouser = localStorage.getItem('tipouser') + '';
+      console.log(this.tipouser)
+      if (this.tipouser == 'docente') {
+        localStorage.removeItem('idestudiante');
+        this.getDataDocente();
+      } else if (this.tipouser == 'estudiante') {
+        localStorage.removeItem('iddocente')
+        this.getDataEstudiante();
+      }
+    });
+
+
   }
 
   ngOnInit() {

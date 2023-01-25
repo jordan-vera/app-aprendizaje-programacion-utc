@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ClaseService } from '../servicios/clases.service';
 import { CursosService } from '../servicios/cursos.service';
 import { DocenteService } from '../servicios/docente.service';
@@ -25,8 +25,10 @@ export class DesboardPage implements OnInit {
     private _router: Router,
     private _cursoService: CursosService,
     private _claseService: ClaseService,
+    private _route: ActivatedRoute,
   ) {
-    this.tipouser = localStorage.getItem('tipouser') + '';
+    this._route.params.subscribe((params: Params) => {
+      this.tipouser = localStorage.getItem('tipouser') + '';
     if (this.tipouser == 'docente') {
       localStorage.removeItem('idestudiante');
       this.getDataDocente();
@@ -34,6 +36,9 @@ export class DesboardPage implements OnInit {
       localStorage.removeItem('iddocente')
       this.getDataEstudiante();
     }
+    });
+
+    
   }
 
   ngOnInit() {

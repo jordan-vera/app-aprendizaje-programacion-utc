@@ -89,7 +89,13 @@ export class ClaseOnePage implements OnInit {
         'idestudiante': this.idestudiante,
       }
     });
-    return await modal.present();
+    await modal.present()
+    const { data } = await modal.onWillDismiss();
+    this.puzzleRespondido = [];
+    this.puzzleList = [];
+    this.puzzle = [];
+    this.getListPuzzle();
+    return;
   }
 
   async modalResolucionQuizz() {
@@ -206,7 +212,7 @@ export class ClaseOnePage implements OnInit {
         } else {
           this.puzzleList = null;
         }
-        
+
       }, error => {
         console.log(error);
       }
@@ -216,6 +222,7 @@ export class ClaseOnePage implements OnInit {
   getPuzzLeResueltos(): void {
     this._estudianteRespuestaPuzzleService.getporestudiante(this.idestudiante).subscribe(
       response => {
+        console.log(response)
         var data = response.response;
         this.puzzleRespondido = data;
         for (let i = 0; i < this.puzzleList.length; i++) {
@@ -225,11 +232,11 @@ export class ClaseOnePage implements OnInit {
               encontrado = true;
             }
           }
-          if(encontrado == false){
+          if (encontrado == false) {
             this.puzzle.push(this.puzzleList[i]);
           }
         }
-        if(this.puzzle.length > 0){
+        if (this.puzzle.length > 0) {
           this.existePuzzle = true;
         } else {
           this.existePuzzle = false;
