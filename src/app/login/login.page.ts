@@ -11,6 +11,7 @@ export class LoginPage implements OnInit {
 
   public nick: string = '';
   public clave: string = '';
+  public veces: number[] = [1,2,3,4,5,6];
 
   constructor(
     private _router: Router,

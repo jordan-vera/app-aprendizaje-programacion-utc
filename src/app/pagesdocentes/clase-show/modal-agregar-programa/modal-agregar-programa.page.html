@@ -10,7 +10,7 @@
 <ion-content class="ion-padding">
 
   <div style="background-color: rgb(177, 177, 177);" class="rounded">
-    <ion-item>
+    <ion-item color="light">
       <ion-label position="stacked">Título pregunta</ion-label>
       <ion-textarea placeholder="Ingresar pregunta" name="titulo" [(ngModel)]="programa.titulo" [autoGrow]="true">
       </ion-textarea>
@@ -18,14 +18,14 @@
   </div>
 
   <br>
-  <ion-label position="stacked" class="mb-2">Escribir respuesta</ion-label>
+  <ion-label position="stacked" class="mb-2 text-white">Escribir respuesta</ion-label>
 
   <div style="height: 100px">
     <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="fragmentoCodigo">
     </ngx-monaco-editor>
   </div>
 
-  <ion-item *ngIf="hayUnaRespuestaCorrecta == false">
+  <ion-item *ngIf="hayUnaRespuestaCorrecta == false" color="light">
     <ion-checkbox slot="start" name="escorrecto" [(ngModel)]="codigoRespuestaCreate.respuestacorrecta">
     </ion-checkbox>
     <ion-label>Es correcta</ion-label>
@@ -37,16 +37,16 @@
   <br>
 
   <div class="mb-2 border-bottom" *ngFor="let x of codigoRespuesta; let i = index">
-    <p class="mb-1"><b>Respuesta {{i+1}}</b></p>
+    <p class="mb-1 text-white"><b>Respuesta {{i+1}}</b></p>
     <div style="height: 100px">
       <ngx-monaco-editor style="height: 100%" [options]="editorOptions2" [(ngModel)]="x.fragmentocodigo">
       </ngx-monaco-editor>
     </div>
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <small *ngIf="x.respuestacorrecta == true" class="text-success">Es correcta</small>
-          <small *ngIf="x.respuestacorrecta == false" class="text-danger">Es incorrecta</small>
+        <ion-col class="text-white">
+          <small *ngIf="x.respuestacorrecta == true" class="text-white">Es correcta</small>
+          <small *ngIf="x.respuestacorrecta == false" class="text-white">Es incorrecta</small>
         </ion-col>
         <ion-col class="text-end">
           <ion-button color="danger" size="small" (click)="eliminarRespuestaCodigo(i)">

@@ -20,6 +20,8 @@ export class CursoShowPage implements OnInit {
   public urlImage: string = Global.urlArchivos;
   public clases: Clases[] = [];
 
+  public spinner: boolean = true;
+
   constructor(
     private _route: ActivatedRoute,
     private _cursoService: CursosService,
@@ -32,6 +34,11 @@ export class CursoShowPage implements OnInit {
       this.idcurso = params.idcurso;
       this.getCurso();
       this.getClases();
+
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
     });
   }
 

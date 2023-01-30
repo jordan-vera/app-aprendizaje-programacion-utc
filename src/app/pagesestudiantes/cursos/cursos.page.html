@@ -23,8 +23,8 @@
 
     </ion-list>
     <ion-list>
-      <ion-list-header> Mis cursos </ion-list-header>
-      <ion-item *ngFor="let x of cursosAprobados" [routerLink]="['/panel/curso-show-estudiantes', x.idcurso]">
+      <ion-list-header class="text-white"> Mis cursos </ion-list-header>
+      <ion-item *ngFor="let x of cursosAprobados" [routerLink]="['/panel/curso-show-estudiantes', x.idcurso]" color="success">
         <ion-avatar slot="start">
           <img src="{{urlImagen+x.imagen}}" />
         </ion-avatar>
@@ -35,4 +35,7 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <app-spinner *ngIf="spinner"></app-spinner>
+
 </ion-content>

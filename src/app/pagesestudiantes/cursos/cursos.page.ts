@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Curso } from 'src/app/models/Cursos';
 import { CursoEstudianteService } from 'src/app/servicios/cursoestudiante.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
@@ -16,11 +17,20 @@ export class CursosPage implements OnInit {
   public nombre: string;
   public urlImagen: string = Global.urlArchivos;
   public idestudiante: number = 0;
+  public spinner: boolean = true;
 
   constructor(
     private _cursoService: CursosService,
-    private _cursoestudianteService: CursoEstudianteService
-  ) { }
+    private _cursoestudianteService: CursoEstudianteService,
+    private _route: ActivatedRoute,
+  ) { 
+    this._route.params.subscribe((params: Params) => {
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
+    });
+  }
 
   ngOnInit() {
     this.idestudiante = +localStorage.getItem('idestudiante');

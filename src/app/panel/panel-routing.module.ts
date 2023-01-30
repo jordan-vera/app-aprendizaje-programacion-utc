@@ -35,23 +35,27 @@ const routes: Routes = [
 
       {
         path: 'cursos-estudiantes',
-        loadChildren: () => import('./../pagesestudiantes/cursos/cursos.module').then( m => m.CursosPageModule)
+        loadChildren: () => import('./../pagesestudiantes/cursos/cursos.module').then(m => m.CursosPageModule)
       },
       {
         path: 'clases-estudiantes',
-        loadChildren: () => import('./../pagesestudiantes/clases/clases.module').then( m => m.ClasesPageModule)
+        loadChildren: () => import('./../pagesestudiantes/clases/clases.module').then(m => m.ClasesPageModule)
       },
       {
         path: 'perfil-estudiante',
-        loadChildren: () => import('./../pagesestudiantes/perfil-estudiante/perfil-estudiante.module').then( m => m.PerfilEstudiantePageModule)
+        loadChildren: () => import('./../pagesestudiantes/perfil-estudiante/perfil-estudiante.module').then(m => m.PerfilEstudiantePageModule)
       },
       {
         path: 'curso-show-estudiantes/:idcurso',
-        loadChildren: () => import('./../pagesestudiantes/curso-show-estudiantes/curso-show-estudiantes.module').then( m => m.CursoShowEstudiantesPageModule)
+        loadChildren: () => import('./../pagesestudiantes/curso-show-estudiantes/curso-show-estudiantes.module').then(m => m.CursoShowEstudiantesPageModule)
       },
       {
         path: 'clase-one-estudiantes/:idcurso/:idclase',
-        loadChildren: () => import('./../pagesestudiantes/clase-one/clase-one.module').then( m => m.ClaseOnePageModule)
+        loadChildren: () => import('./../pagesestudiantes/clase-one/clase-one.module').then(m => m.ClaseOnePageModule)
+      },
+      {
+        path: 'estudiantes-respuestas/:idestudiante/:idcurso',
+        loadChildren: () => import('./../pagesdocentes/estudiantes-respuestas-show/estudiantes-respuestas-show.module').then(m => m.EstudiantesRespuestasShowPageModule)
       },
     ]
   },

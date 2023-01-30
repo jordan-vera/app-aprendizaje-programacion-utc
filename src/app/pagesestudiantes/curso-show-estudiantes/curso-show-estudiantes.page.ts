@@ -23,6 +23,7 @@ export class CursoShowEstudiantesPage implements OnInit {
   public cursoestudianteCreate: Cursoestudiante = new Cursoestudiante(0, 0, 0, '');
   public estado = '';
   public clasesList: Clases[];
+  public spinner: boolean = true;
 
   constructor(
     private _route: ActivatedRoute,
@@ -36,6 +37,10 @@ export class CursoShowEstudiantesPage implements OnInit {
       this.getCurso();
       this.getcursoestudiante();
       this.getClases();
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
     });
   }
 

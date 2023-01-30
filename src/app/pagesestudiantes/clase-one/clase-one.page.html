@@ -5,7 +5,6 @@
     </ion-button>
     <br>
   </div>
-  <br>
 
   <ion-item color="secondary" *ngIf="existePrograma == true">
     <ion-label>Programas</ion-label>
@@ -43,16 +42,16 @@
   </ion-list>
 
   <!--Msj no existen preguntas-->
-  <div class="text-center" *ngIf="existePrograma != true && existeQuizz != true && existePuzzle != true">
+  <div class="text-center text-white" *ngIf="existePrograma != true && existeQuizz != true && existePuzzle != true">
     <h5>No existen clases para realizar</h5>
   </div>
 
   <br>
-  <div class="border-bottom pb-1 text-info border-info">
+  <div class="border-bottom pb-1 text-white border-info">
     <small><b>Clases realizadas</b></small>
   </div>
   <ion-list>
-    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Programas</b> </ion-list-header>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-white mb-0 pb-0">Programas</b> </ion-list-header>
     <ion-item *ngFor="let x of programasRespondidos" color="light">
       <ion-label>
         <h3>{{x.titulo}}</h3>
@@ -62,7 +61,7 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Quizz</b> </ion-list-header>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-white mb-0 pb-0">Quizz</b> </ion-list-header>
     <ion-item *ngFor="let x of quizzRespondidos" color="light">
       <ion-label>
         <h3>{{x.titulo}}</h3>
@@ -72,13 +71,15 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-list-header class="mb-0 pb-0"> <b class="text-primary mb-0 pb-0">Puzzle</b> </ion-list-header>
+    <ion-list-header class="mb-0 pb-0"> <b class="text-white mb-0 pb-0">Puzzle</b> </ion-list-header>
     <ion-item *ngFor="let x of puzzleRespondido" color="light">
       <ion-label>
         <h3><b>Puntaje: </b>{{x.puntaje}} - <b>Nombre: </b>{{x.titulo}}</h3>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <app-spinner *ngIf="spinner"></app-spinner>
 </ion-content>
 
 
@@ -95,7 +96,7 @@
     <ion-content class="ion-padding">
 
       <div *ngFor="let xl of programasCodigo; let i = index">
-        <ion-item color="primary" expand="block">
+        <ion-item color="success" expand="block">
           <ion-label><b>{{i+1}}. {{xl.titulo}}</b></ion-label>
         </ion-item>
         <div class="mb-2 border-bottom" *ngFor="let x of xl.codigos; let il = index">
@@ -104,7 +105,7 @@
             <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="x.fragmentocodigo">
             </ngx-monaco-editor>
           </div>
-          <ion-item class="pt-0 mt-0">
+          <ion-item class="pt-0 mt-0" color="light">
             <ion-checkbox slot="start" name="{{x.idcodigo}}" id="{{x.idcodigo}}"
               (click)="seleccionCodigo(x.idcodigo, x.idprograma)">
             </ion-checkbox>
@@ -119,4 +120,7 @@
       <br>
     </ion-content>
   </ng-template>
+
+  
+
 </ion-modal>

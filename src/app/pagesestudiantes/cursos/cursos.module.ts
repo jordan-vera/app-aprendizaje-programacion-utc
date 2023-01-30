@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CursosPageRoutingModule } from './cursos-routing.module';
 
 import { CursosPage } from './cursos.page';
+import { SpinnerPageModule } from 'src/app/spinner/spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CursosPageRoutingModule
+    CursosPageRoutingModule,
+    SpinnerPageModule
   ],
   declarations: [CursosPage]
 })

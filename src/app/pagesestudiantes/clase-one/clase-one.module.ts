@@ -10,6 +10,7 @@ import { ClaseOnePage } from './clase-one.page';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { ModalResolucionQuizzPageModule } from './modal-resolucion-quizz/modal-resolucion-quizz.module';
 import { ModalResolucionPuzzlePageModule } from './modal-resolucion-puzzle/modal-resolucion-puzzle.module';
+import { SpinnerPageModule } from 'src/app/spinner/spinner.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ModalResolucionPuzzlePageModule } from './modal-resolucion-puzzle/modal
     ClaseOnePageRoutingModule,
     MonacoEditorModule,
     ModalResolucionQuizzPageModule,
-    ModalResolucionPuzzlePageModule
+    ModalResolucionPuzzlePageModule,
+    SpinnerPageModule
   ],
   declarations: [ClaseOnePage]
 })

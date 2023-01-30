@@ -48,6 +48,8 @@ export class ClaseShowPage implements OnInit {
   editorOptions = { theme: 'vs-dark', language: 'javascript' };
   editorOptions2 = { theme: 'vs-dark', language: 'javascript' };
 
+  public spinner: boolean = true;
+
   constructor(
     private _route: ActivatedRoute,
     private _claseService: ClaseService,
@@ -62,6 +64,10 @@ export class ClaseShowPage implements OnInit {
     this._route.params.subscribe((params: Params) => {
       this.idclase = params.idclase;
       this.getClase();
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
     });
   }
 

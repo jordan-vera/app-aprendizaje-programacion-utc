@@ -4,7 +4,7 @@
   </ion-button>
 
   <ion-list>
-    <ion-item *ngFor="let x of cursosList" [routerLink]="['/panel/curso-show', x.idcurso]">
+    <ion-item *ngFor="let x of cursosList" [routerLink]="['/panel/curso-show', x.idcurso]" color="success">
       <ion-avatar slot="start">
         <img src="{{urlImagen+x.imagen}}" />
       </ion-avatar>
@@ -14,6 +14,8 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <app-spinner *ngIf="spinner"></app-spinner>
 
 
   <ion-modal trigger="open-modal">

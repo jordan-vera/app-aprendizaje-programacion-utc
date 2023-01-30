@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { IonModal, ToastController } from '@ionic/angular';
 import { UUID } from 'angular2-uuid';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -20,11 +21,21 @@ export class CursosPage implements OnInit {
   public imagenCargada: any = null;
   public urlImagen: string = Global.urlArchivos;
 
+  public spinner: boolean = true;
+
   constructor(
     private imageCompress: NgxImageCompressService,
     private _cursoService: CursosService,
-    private toastController: ToastController
-  ) { }
+    private toastController: ToastController,
+    private _route: ActivatedRoute,
+  ) { 
+    this._route.params.subscribe((params: Params) => {
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
+    });
+  }
 
   ngOnInit() {
     this.getCursos();

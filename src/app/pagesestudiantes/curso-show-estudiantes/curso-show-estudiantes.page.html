@@ -1,9 +1,9 @@
 <ion-content class="ion-padding">
-  <div class="rounded">
+  <div class="rounded text-center">
     <img src="{{urlImage+curso.imagen}}" class="rounded" alt="" srcset="">
   </div>
-  <h5>{{curso.nombrecurso}}</h5>
-  <small>{{curso.created_at}}</small>
+  <h5 class="text-white">{{curso.nombrecurso}}</h5>
+  <small class="text-white">{{curso.created_at}}</small>
   <br>
 
   <div *ngIf="cursoestudiante == null && estado == '' " class="pt-4 pb-2">
@@ -18,8 +18,8 @@
 
   <br>
   <ion-list *ngIf="cursoestudiante != null || estado == 'aprobado' ">
-    <ion-list-header> Clases del curso </ion-list-header>
-    <ion-item *ngFor="let x of clasesList" [routerLink]="['/panel/clase-one-estudiantes', x.idcurso, x.idclase]">
+    <ion-list-header class="text-white"> Clases del curso </ion-list-header>
+    <ion-item *ngFor="let x of clasesList" [routerLink]="['/panel/clase-one-estudiantes', x.idcurso, x.idclase]" color="success">
       <ion-avatar slot="start">
         <img src="{{urlImage+x.imagen}}" />
       </ion-avatar>
@@ -31,4 +31,6 @@
 
   </ion-list>
 
+  <app-spinner *ngIf="spinner"></app-spinner>
+  
 </ion-content>

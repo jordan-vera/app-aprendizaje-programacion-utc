@@ -1,5 +1,5 @@
 <ion-content class="ion-padding">
-  <div class="text-success">
+  <div class="text-white">
     <h5 class="pt-0"> 
       <b> {{nombre}}</b>
     </h5>
@@ -24,21 +24,6 @@
         </ion-card>
       </div>
       <div class="col-6 ps-1 pe-1">
-        <ion-card color="tertiary">
-          <ion-card-header class="text-center">
-            <ion-card-title><ion-icon name="today-outline" ></ion-icon></ion-card-title>
-            <ion-card-title>Clases</ion-card-title>
-            
-          </ion-card-header>
-        
-          <ion-card-content class="text-center">
-            <h1>{{countClasesDocente}}</h1>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-6 ps-1 pe-1">
         <ion-card color="primary">
           <ion-card-header class="text-center">
             <ion-card-title><ion-icon name="people-outline"></ion-icon></ion-card-title>
@@ -51,6 +36,22 @@
           </ion-card-content>
         </ion-card>
       </div>
+      <!--div class="col-6 ps-1 pe-1">
+        <ion-card color="tertiary">
+          <ion-card-header class="text-center">
+            <ion-card-title><ion-icon name="today-outline" ></ion-icon></ion-card-title>
+            <ion-card-title>Clases</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content class="text-center">
+            <h1>{{countClasesDocente}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </div -->
+    </div>
+    <div class="row mt-3">
+      
     </div>
   </div>
 
@@ -85,5 +86,7 @@
     </div>
     
   </div>
+
+  <app-login-animation></app-login-animation>
   
 </ion-content>

@@ -19,6 +19,10 @@ export class EstudiantesService {
         return this._http.get(this.url + 'estudiante/' + idusuario);
     }
 
+    getOneEstudiante(idestudiante: number): Observable<any> {
+        return this._http.get(this.url + 'estudiante-one/' + idestudiante);
+    }
+
     getCountPorDocente(iddocente: string): Observable<any> {
         return this._http.get(this.url + 'estudiante-count-docente/' + iddocente);
     }

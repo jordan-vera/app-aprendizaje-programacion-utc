@@ -18,11 +18,18 @@ export class ClasesPage implements OnInit {
   public cursosList: Curso[];
   public clasesList: Clases[];
 
+  public spinner: boolean = true;
+
   constructor(
     private _claseService: ClaseService,
     private _cursoService: CursosService,
     private toastController: ToastController
-  ) { }
+  ) {
+    this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
+   }
 
   ngOnInit() {
     this.getCursos();
@@ -34,8 +41,9 @@ export class ClasesPage implements OnInit {
   }
 
   getClases(): void {
-    this._claseService.getclases(+localStorage.getItem('iddocente')).subscribe(
+    this._claseService.getPorDocente(+localStorage.getItem('iddocente')).subscribe(
       response => {
+        console.log(response)
         this.clasesList = response.response;
       }, error => {
         console.log(error);

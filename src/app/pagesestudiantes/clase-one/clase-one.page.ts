@@ -56,6 +56,8 @@ export class ClaseOnePage implements OnInit {
   public estudianteProgramas: EstudianteProgramas = new EstudianteProgramas(0, 0, 0, '');
   public respuestaCodigo: RespuestaCodigo = new RespuestaCodigo(0, 0, 0, '');
 
+  public spinner: boolean = true;
+
   constructor(
     private _route: ActivatedRoute,
     private _programaService: ProgramaService,
@@ -74,6 +76,10 @@ export class ClaseOnePage implements OnInit {
       this.idestudiante = +localStorage.getItem('idestudiante');
       this.getProgramasResueltos();
       this.getClase();
+      this.spinner = true;
+      setTimeout(() => {
+        this.spinner = false;
+      }, 1000);
     });
   }
 

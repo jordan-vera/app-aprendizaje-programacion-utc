@@ -1,6 +1,6 @@
 export var Global = {
-    urlApi: 'http://localhost:8080/',
-    urlArchivos: 'http://localhost/archivosAprendizajeUtc/',
+    urlApi: 'https://apirest.futurolamanense.fin.ec/api-aprendizaje-programacion-utc/public/',
+    urlArchivos: 'https://apirest.futurolamanense.fin.ec/archivosAprendizajeUtc/',
 };
 
 

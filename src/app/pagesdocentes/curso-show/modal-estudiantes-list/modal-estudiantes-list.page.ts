@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Cursoestudiante } from 'src/app/models/Cursoestudiante';
 import { Estudiante } from 'src/app/models/Estudiante';
@@ -17,11 +18,17 @@ export class ModalEstudiantesListPage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private _cursoEstudianteService: CursoEstudianteService
+    private _cursoEstudianteService: CursoEstudianteService,
+    private _router: Router,
   ) { }
 
   ngOnInit() {
     this.getEstudiantes();
+  }
+
+  irEstudianteShow(idestudiante): void {
+    this._router.navigate(['/panel/estudiantes-respuestas', idestudiante, this.idcurso]);
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
   cancel() {

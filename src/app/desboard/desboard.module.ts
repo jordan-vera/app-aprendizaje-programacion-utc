@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DesboardPageRoutingModule } from './desboard-routing.module';
 
 import { DesboardPage } from './desboard.page';
+import { LoginAnimationComponent } from '../login-animation/login-animation.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { DesboardPage } from './desboard.page';
     IonicModule,
     DesboardPageRoutingModule
   ],
-  declarations: [DesboardPage]
+  declarations: [DesboardPage, LoginAnimationComponent]
 })
 export class DesboardPageModule {}
