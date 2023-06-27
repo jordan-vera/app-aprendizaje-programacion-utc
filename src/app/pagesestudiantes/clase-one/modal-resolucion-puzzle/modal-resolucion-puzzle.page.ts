@@ -24,6 +24,7 @@ export class ModalResolucionPuzzlePage implements OnInit {
   public cantPiezasY: number = 3;
   public cantPiezasx: number = 3;
   public tiempousado: number = 0;
+  public contador: number = 1;
 
   constructor(
     private modalCtrl: ModalController,
@@ -34,6 +35,12 @@ export class ModalResolucionPuzzlePage implements OnInit {
 
   ngOnInit() {
     this.getListPuzzle();
+    var intervalo = setInterval(()=>{
+      this.contador ++;
+      if(this.contador == 4){
+        clearInterval(intervalo);
+      }
+    },1400)
   }
 
   async piezas(imagen: any) {
@@ -43,7 +50,7 @@ export class ModalResolucionPuzzlePage implements OnInit {
       pieces: { x: this.cantPiezasx, y: this.cantPiezasY },
       attraction: 5,   // distance to snap pieces
       aligned: true,   // don't overlap pieces on start
-      zoom: 0.6,       // initial zoom of context
+      zoom: 0.8,       // initial zoom of context
       beforeInit: canvas => {
         const intervalo = setInterval(() => {
           if (this.tiempoEstimado == 0 || this.juegoArmado == true) {

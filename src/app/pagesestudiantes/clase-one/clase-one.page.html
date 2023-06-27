@@ -72,7 +72,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header class="mb-0 pb-0"> <b class="text-white mb-0 pb-0">Puzzle</b> </ion-list-header>
-    <ion-item *ngFor="let x of puzzleRespondido" color="light">
+    <ion-item *ngFor="let x of puzzleRespondido" color="secondary">
       <ion-label>
         <h3><b>Puntaje: </b>{{x.puntaje}} - <b>Nombre: </b>{{x.titulo}}</h3>
       </ion-label>
@@ -120,7 +120,4 @@
       <br>
     </ion-content>
   </ng-template>
-
-  
-
 </ion-modal>

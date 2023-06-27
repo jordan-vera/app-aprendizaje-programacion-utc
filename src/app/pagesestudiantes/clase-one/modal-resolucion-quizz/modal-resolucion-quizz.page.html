@@ -9,11 +9,11 @@
 
 <ion-content class="ion-padding">
   <div *ngFor="let x of respuestasQuizz; let i = index">
-    <ion-item color="primary" expand="block" color="text-success">
-      <ion-label><b>{{i+1}}. {{x.titulo}}</b></ion-label>
+    <ion-item color="secondary" expand="block" color="text-success">
+      <ion-label><b class="text-white">{{i+1}}. {{x.titulo}}</b></ion-label>
     </ion-item>
     <div class="mb-2 border-bottom" *ngFor="let xl of x.respuestas; let il = index">
-      <ion-item class="pt-0 mt-0" color="light">
+      <ion-item class="pt-0 mt-0" color="secondary">
         <ion-checkbox slot="start" name="{{xl.idrespuesta}}" id="{{xl.idrespuesta}}" (click)="seleccionarRespuesta(xl.idrespuesta, x.idquizz)">
         </ion-checkbox>
         <p>{{xl.respuesta}}</p>
@@ -21,7 +21,10 @@
     </div>
   </div>
 
-  <button class="btn btn-success w-100" (click)="guardarRespuestas()">
+  <button class="btn btn-warning w-100" (click)="guardarRespuestas()">
     Finalizar
   </button>
+
+
+  <app-contador [contador]="contador" *ngIf="contador < 4"></app-contador>
 </ion-content>

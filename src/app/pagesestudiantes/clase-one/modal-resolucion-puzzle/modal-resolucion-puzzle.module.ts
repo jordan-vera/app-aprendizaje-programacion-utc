@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalResolucionPuzzlePage } from './modal-resolucion-puzzle.page';
+import { ContadorModule } from 'src/app/contador/contador.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ContadorModule
   ],
   declarations: [ModalResolucionPuzzlePage],
   exports: [ModalResolucionPuzzlePage]

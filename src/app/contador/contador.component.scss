@@ -1,0 +1,24 @@
+.contenedor {
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    background-color: #19f781;
+    z-index: 900;
+}
+
+.numero {
+    z-index: 1001;
+    font-size: 195px;
+    position: absolute;
+    top: 32vh;
+    left: 18vh;
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+
+
+    background: -webkit-linear-gradient(rgb(255, 230, 0), rgb(212, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: tomato;
+}

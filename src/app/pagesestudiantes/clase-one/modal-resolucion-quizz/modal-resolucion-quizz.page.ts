@@ -19,6 +19,7 @@ export class ModalResolucionQuizzPage implements OnInit {
   public procesoRespuesta: any[] = [];
   public estudiantequizz: Estudiantequizz = new Estudiantequizz(0, 0, 0, '');
   public estudianterespuestaquizz: Estudianterespuestaquizz = new Estudianterespuestaquizz(0, 0, 0, '');
+  public contador: number = 1;
 
   constructor(
     private modalCtrl: ModalController,
@@ -30,6 +31,12 @@ export class ModalResolucionQuizzPage implements OnInit {
 
   ngOnInit() {
     this.getQuizzList();
+    var intervalo = setInterval(()=>{
+      this.contador ++;
+      if(this.contador == 4){
+        clearInterval(intervalo);
+      }
+    },1400)
   }
 
   guardarRespuestas(): void {
